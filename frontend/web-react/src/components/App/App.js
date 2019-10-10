@@ -1,12 +1,13 @@
 import React from 'react';
 import './App.css';
+import Main from  '../Main/Main.js'
+import AppToolBar from '../AppToolBar/AppToolBar'
 
 function App() {
   return (
     <div>
-      <h1>
-        asd
-      </h1>
+      <AppToolBar/>
+      <Main/>
     </div>
   );
 }
