@@ -1,4 +1,5 @@
 import React from 'react';
+import Cards from '../Cards/Cards'
 
 class Main extends React.Component {
     constructor(props) {
@@ -12,7 +13,7 @@ class Main extends React.Component {
         return (        
             <div>
                 <h1>
-                    Some shit
+                    <Cards/>
                 </h1>
             </div>
         )
