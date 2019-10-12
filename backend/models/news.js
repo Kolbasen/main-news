@@ -18,7 +18,7 @@ const News = sequelize.define('news', {
       }
 })
 sequelize.sync().then(result=>{
-    console.log(result);
+    // console.log(result);
   })
   .catch(err=> console.log(err));
 
