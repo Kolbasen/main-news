@@ -6,7 +6,6 @@ export default makeStyles((theme) => ({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        
     },
     card: {
         maxWidth: 300,
