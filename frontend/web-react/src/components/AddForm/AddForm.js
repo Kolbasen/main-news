@@ -1,5 +1,5 @@
 import React, { useState } from 'react' 
-import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button  } from '@material-ui/core'
+import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button, TextareaAutosize  } from '@material-ui/core'
 import useStyles from './style';
 
 
@@ -37,7 +37,7 @@ export default function AddForm(props) {
 							/>
 						</Grid>
                         <Grid>
-							<TextField
+							<TextareaAutosize
 								className={classes.input}
 								label='Text'
 								onChange={({target}) => setText(target.value)}

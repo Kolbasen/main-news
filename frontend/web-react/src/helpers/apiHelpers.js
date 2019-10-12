@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:8000';
     
-const getCards = async () => {
+const getTenCards = async () => {
     const url = `${API_URL}`;
     const result = await fetch(url);
     console.log(result)
@@ -27,6 +27,6 @@ const extractResult = async result => {
 }
 
 export { 
-    getCards,
+    getTenCards,
     sendCard
 }

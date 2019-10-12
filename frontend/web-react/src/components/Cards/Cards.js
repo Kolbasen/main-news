@@ -4,14 +4,15 @@ import useStyles from './style'
 import photo from '../../static/nature.jpg'
 
 
+
 export default function Cards(props) {
     const classes = useStyles();
     // const { header, text } = props;
     const { cards } = props;
 
     return(
-        cards.map((value) => (
-            <div key={value.id} className={classes.items}>
+        cards.map((value, id) => (
+            <div key={id} className={classes.items}>
          <Card className={classes.card}>
              <CardActionArea>
               <CardMedia
@@ -22,9 +23,6 @@ export default function Cards(props) {
                 <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
             {value.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {value.text}
           </Typography>
                 </CardContent>
             </CardActionArea>
