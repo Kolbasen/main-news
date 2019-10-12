@@ -16,7 +16,7 @@ const insertNews = async (name, text) => {
 
 const getNews = async () => {
   try {
-    const res = await News.findAll({raw: true});
+    const res = await News.findAll({ raw: true});
     console.log(res);
     return res;
   } catch (error) {

@@ -10,8 +10,6 @@ async function mainPageController(req, res) {
     } catch (error) {
         
     }
-
-    return res.send('a')
 }
 
 module.exports = mainPageController;
