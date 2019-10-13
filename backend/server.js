@@ -3,6 +3,7 @@
 const express = require('express');
 const app = express();
 const hotNewsRouter = require('./routes/hotNews/hotNews');
+const oneNewsRouter = require('./routes/oneNews/oneNews');
 const mainPageRouter = require('./routes/mainPage/mainPage');
 
 const bodyParser = require('body-parser');
@@ -27,6 +28,8 @@ app.use((req, res, next) => {
   });
 
 app.use('/', mainPageRouter);
+
+app.use('/news', oneNewsRouter);
 
 app.use('/hotnews', hotNewsRouter);
 

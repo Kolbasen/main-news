@@ -8,7 +8,8 @@ async function mainPageController(req, res) {
         console.log(result);
         res.status(200).json(result)
     } catch (error) {
-        
+        console.log('Catched error: ')
+        console.log(error)
     }
 }
 

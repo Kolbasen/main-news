@@ -26,7 +26,20 @@ const getNews = async () => {
   }
 }
 
+const getOneNews = async id => {
+  try {
+    const res = await News.findOne({where: {id: id}, raw: true })
+    console.log(res)
+    return res;
+  } catch (error) {
+    console.log('Getting error: ')
+    console.log(error)
+    return error;
+  }
+}
+
 module.exports = {
   getNews,  
-  insertNews
+  insertNews,
+  getOneNews
 };
