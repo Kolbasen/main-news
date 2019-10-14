@@ -4,13 +4,11 @@ import useStyles from './style';
 
 
 export default function AddForm(props) {
-    console.log(props)
     const { submitNews, addingNews } = props;
     const classes = useStyles(); 
     const [header, setHeader] = useState('');
-    const [text, setText] = useState('');
-
-    console.log(addingNews)
+	const [text, setText] = useState('');
+	
     return (
         <Container component='main' maxWidth='xs'>
 			<CssBaseline/>

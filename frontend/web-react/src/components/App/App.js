@@ -1,13 +1,24 @@
 import React from 'react';
+import {
+	BrowserRouter as Router,
+	Route,
+	Switch,
+} from 'react-router-dom';
 import './App.css';
-import Main from  '../Main/Main.js'
+import Cards from '../Cards/Cards'
 import AppToolBar from '../AppToolBar/AppToolBar'
+import CurrentNews from '../CurrentNews/CurrentNews';
 
 function App() {
   return (
     <div>
+      <Router>
       <AppToolBar/>
-      <Main/>
+        <Switch>
+          <Route exact path='/' component={Cards}/>
+          <Route path='/news' component={CurrentNews}/>
+        </Switch>
+      </Router>
     </div>
   );
 }

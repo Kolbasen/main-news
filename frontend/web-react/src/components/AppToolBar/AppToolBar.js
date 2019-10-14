@@ -16,21 +16,21 @@ export default function AppToolBar() {
             </Typography> */}
             <div className={classes.items}>
             <ListItem button component='a' href='/'>
-				      <ListItemText primary='Home'/>
+				      <ListItemText primary='Мир'/>
 			      </ListItem>
             <ListItem button component='a' href='/'>
-				    <ListItemText primary='Home'/>
+				    <ListItemText primary='Политика'/>
 			        </ListItem>
             <ListItem button component='a' href='/'>
-				      <ListItemText primary='Home'/>
+				      <ListItemText primary='Украина'/>
 			      </ListItem>
             <ListItem button component='a' href='/'>
-				      <ListItemText primary='Home'/>
+				      <ListItemText primary='Россия'/>
 			      </ListItem>
             <ListItem button component='a' href='/'>
-				      <ListItemText primary='Home'/>
+				      <ListItemText primary='Технологии'/>
 			      </ListItem>
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                   <Search/>
               </div>
@@ -42,7 +42,7 @@ export default function AppToolBar() {
                 }}
                 inputProps={{ 'aria-label': 'search' }}
               />
-            </div>
+            </div> */}
             </div>
           </Toolbar>
           

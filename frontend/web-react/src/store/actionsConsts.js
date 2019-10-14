@@ -1,0 +1,3 @@
+export const SELECT_CURRENT_NEWS = 'SELECT_CURRENT_NEWS'
+
+export const ADD_CARDS = 'ADD_CARDS' 
