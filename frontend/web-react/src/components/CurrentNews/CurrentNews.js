@@ -1,27 +1,31 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom'
 import { Card, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
 import HotNews from '../HotNews/HotNews'
 import useStyles from './style'
 import photo from '../../static/nature.jpg'
-import { getOneNews } from '../../helpers/apiHelpers'
+import { getOneNews, getHotNews } from '../../helpers/apiHelpers'
 import { connect } from 'react-redux'
 import {setCards} from '../../store/cards/actions'
+import { setHotNews } from '../../store/hotNews/actions'
 import { setCurrentNews } from '../../store/currentNews/actions'
 
 function CurrentNews(props) {
     const classes = useStyles();
-    const { id } = props;
+    // console.log('Remounted current news')
+    const { id, setHotNews } = props;
     const [card, setCard] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     console.log(id)
     useEffect(() => {
+        setIsLoading(true)
         const fetchOneNews = async id => {
-            console.log(id)
             try {
-                const result = await getOneNews(id)
-                console.log(result)
-                if (result.success) {
-                    setCard(result.entity);
+                const [oneNews, hotNews] = await Promise.all([getOneNews(id), getHotNews()]);
+                // console.log(oneNews, hotNews)
+                if (oneNews.success && hotNews.success) {
+                    setHotNews(hotNews.entity)
+                    setCard(oneNews.entity);
                     setIsLoading(false)
                 } else {
                     console.log('Something went wrong')
@@ -68,14 +72,18 @@ function CurrentNews(props) {
     )
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
+    console.log(state)
+    return {
     cards: state.cards.cards,
-    id: state.id.id
-})
+    id: state.id.id,
+    hotNews: state.hotNews.hotNews}
+}
 
 const mapActionsToProps = {
     setCurrentNews,
-    setCards
+    setCards,
+    setHotNews
 }
 
 export default connect(mapStateToProps, mapActionsToProps)(CurrentNews);

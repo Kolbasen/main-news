@@ -14,8 +14,8 @@ const useInfiniteScroll = callback => {
   }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', debounce(handleScroll, 500));
+    return () => window.removeEventListener('scroll', debounce(handleScroll, 500));
   }, []);
 
   useEffect(() => {

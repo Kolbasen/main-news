@@ -2,21 +2,22 @@ import React from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
-	Switch,
+  Switch,
 } from 'react-router-dom';
 import './App.css';
 import Cards from '../Cards/Cards'
 import AppToolBar from '../AppToolBar/AppToolBar'
-import CurrentNews from '../CurrentNews/CurrentNews';
+import CurrentNewsContainer from '../CurrentNews/CurrentNewsContainer'
 
 function App() {
+
   return (
     <div>
       <Router>
       <AppToolBar/>
         <Switch>
           <Route exact path='/' component={Cards}/>
-          <Route path='/news' component={CurrentNews}/>
+          <Route exact path='/news/:id' children={<CurrentNewsContainer/>}/>
         </Switch>
       </Router>
     </div>

@@ -27,6 +27,13 @@ const getOneNews = async id => {
     return extractResult(result)
 }
 
+const getHotNews = async () => {
+    const endpoint = `hotnews`;
+    const url = `${API_URL}/${endpoint}`
+    const result = await fetch(url);
+    return extractResult(result);
+}
+
 const extractResult = async result => {
     const entity = await result.json();
     const success = result.statusText === 'OK'
@@ -36,5 +43,6 @@ const extractResult = async result => {
 export { 
     getTenCards,
     sendCard,
-    getOneNews
+    getOneNews,
+    getHotNews
 }

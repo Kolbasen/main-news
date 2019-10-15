@@ -21,10 +21,11 @@ function Cards(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [addingNews, setAddingNews] = useState(false);
 
-    const submitNews = (header, text) => {
+    const submitNews = (header, tags, text) => {
         const sendData = async () => {
             const data = {
                 header,
+                tags,
                 text
             }
             const result = await sendCard(data)
@@ -35,12 +36,9 @@ function Cards(props) {
     }
 
     function fetchMoreListItems() {
-        console.log(1)
           const fetchingMoreCards = async () => {
             const result = await getTenCards();
             if (result.success) {
-                console.log(result.entity)
-                console.log(cards)
                 const newCards = cards.concat(result.entity)
                 setCards(newCards)
                 setIsFetching(false)

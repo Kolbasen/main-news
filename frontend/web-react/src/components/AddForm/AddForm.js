@@ -6,7 +6,8 @@ import useStyles from './style';
 export default function AddForm(props) {
     const { submitNews, addingNews } = props;
     const classes = useStyles(); 
-    const [header, setHeader] = useState('');
+	const [header, setHeader] = useState('');
+	const [tags, setTags] = useState('');
 	const [text, setText] = useState('');
 	
     return (
@@ -34,6 +35,17 @@ export default function AddForm(props) {
 								required
 							/>
 						</Grid>
+						<Grid>
+							<TextField
+								className={classes.input}
+								label='Tags'
+								onChange={({target}) => setTags(target.value)}
+								value={tags}
+								autoFocus
+								fullWidth
+								required
+							/>
+						</Grid>
                         <Grid>
 							<TextareaAutosize
 								className={classes.input}
@@ -51,9 +63,10 @@ export default function AddForm(props) {
 								color='secondary' 
 								variant='contained' 
 								onClick={() => {
-                                    submitNews(header, text);
+                                    submitNews(header, tags, text);
                                     setHeader('');
-                                    setText('');
+									setText('');
+									setTags('');
 								}}>
 								Save Info
 							</Button>
