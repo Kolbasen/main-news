@@ -3,9 +3,17 @@
 const express = require('express');
 const app = express();
 const hotNewsRouter = require('./routes/hotNews/hotNews');
+const oneNewsRouter = require('./routes/oneNews/oneNews');
 const mainPageRouter = require('./routes/mainPage/mainPage');
 
 const bodyParser = require('body-parser');
+
+const sequelize = require('./config/sequelize');
+
+sequelize.sync().then(result=>{
+  // console.log(result);
+})
+.catch(err=> console.log(1));
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
@@ -27,6 +35,8 @@ app.use((req, res, next) => {
   });
 
 app.use('/', mainPageRouter);
+
+app.use('/news', oneNewsRouter);
 
 app.use('/hotnews', hotNewsRouter);
 

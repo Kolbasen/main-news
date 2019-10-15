@@ -5,10 +5,11 @@ export default makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        alignItems: 'center',
+        marginTop: '70px'
     },
     card: {
-        width: 300,
+        width: 150,
+        height: 50,
         marginBottom: theme.spacing(2)
       },
     media: {

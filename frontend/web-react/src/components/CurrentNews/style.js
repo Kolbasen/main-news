@@ -1,11 +1,16 @@
 import { makeStyles, fade } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
+    container: {
+      display: 'flex',
+      marginTop: '70px',
+      justifyContent: 'center',
+    },  
     items: {
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
+        // justifyContent: 'center',
+        marginRight: 40
     },
     card: {
         width: 300,

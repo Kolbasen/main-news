@@ -1,6 +1,6 @@
 const API_URL = 'http://localhost:8000';
     
-const getCards = async () => {
+const getTenCards = async () => {
     const url = `${API_URL}`;
     const result = await fetch(url);
     console.log(result)
@@ -20,6 +20,20 @@ const sendCard = async (data) => {
     return extractResult(result)
 }
 
+const getOneNews = async id => {
+    const endpoint = `news/${id}`;
+    const url = `${API_URL}/${endpoint}`;
+    const result = await fetch(url);
+    return extractResult(result)
+}
+
+const getHotNews = async () => {
+    const endpoint = `hotnews`;
+    const url = `${API_URL}/${endpoint}`
+    const result = await fetch(url);
+    return extractResult(result);
+}
+
 const extractResult = async result => {
     const entity = await result.json();
     const success = result.statusText === 'OK'
@@ -27,6 +41,8 @@ const extractResult = async result => {
 }
 
 export { 
-    getCards,
-    sendCard
+    getTenCards,
+    sendCard,
+    getOneNews,
+    getHotNews
 }

@@ -1,16 +1,15 @@
 import React, { useState } from 'react' 
-import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button  } from '@material-ui/core'
+import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button, TextareaAutosize  } from '@material-ui/core'
 import useStyles from './style';
 
 
 export default function AddForm(props) {
-    console.log(props)
     const { submitNews, addingNews } = props;
     const classes = useStyles(); 
-    const [header, setHeader] = useState('');
-    const [text, setText] = useState('');
-
-    console.log(addingNews)
+	const [header, setHeader] = useState('');
+	const [tags, setTags] = useState('');
+	const [text, setText] = useState('');
+	
     return (
         <Container component='main' maxWidth='xs'>
 			<CssBaseline/>
@@ -36,8 +35,19 @@ export default function AddForm(props) {
 								required
 							/>
 						</Grid>
-                        <Grid>
+						<Grid>
 							<TextField
+								className={classes.input}
+								label='Tags'
+								onChange={({target}) => setTags(target.value)}
+								value={tags}
+								autoFocus
+								fullWidth
+								required
+							/>
+						</Grid>
+                        <Grid>
+							<TextareaAutosize
 								className={classes.input}
 								label='Text'
 								onChange={({target}) => setText(target.value)}
@@ -53,9 +63,10 @@ export default function AddForm(props) {
 								color='secondary' 
 								variant='contained' 
 								onClick={() => {
-                                    submitNews(header, text);
+                                    submitNews(header, tags, text);
                                     setHeader('');
-                                    setText('');
+									setText('');
+									setTags('');
 								}}>
 								Save Info
 							</Button>

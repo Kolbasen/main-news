@@ -15,12 +15,15 @@ const News = sequelize.define('news', {
       text: {
         type: Sequelize.TEXT,
         allowNull: false
+      },
+      tags: {
+        type: Sequelize.TEXT,
+        allowNull: false
       }
 })
-sequelize.sync().then(result=>{
-    // console.log(result);
-  })
-  .catch(err=> console.log(err));
+
+
+
 
 module.exports = {
     News,

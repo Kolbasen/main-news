@@ -3,7 +3,7 @@ import { makeStyles, fade } from '@material-ui/core/styles'
 export default makeStyles((theme) => ({
     root: {
         // alignItems: 'center',
-        width: '65%',
+        width: '100%',
         marginLeft: 'auto',
         marginRight: 'auto'
       },

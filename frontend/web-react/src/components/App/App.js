@@ -1,13 +1,25 @@
 import React from 'react';
+import {
+	BrowserRouter as Router,
+	Route,
+  Switch,
+} from 'react-router-dom';
 import './App.css';
-import Main from  '../Main/Main.js'
+import Cards from '../Cards/Cards'
 import AppToolBar from '../AppToolBar/AppToolBar'
+import CurrentNewsContainer from '../CurrentNews/CurrentNewsContainer'
 
 function App() {
+
   return (
     <div>
+      <Router>
       <AppToolBar/>
-      <Main/>
+        <Switch>
+          <Route exact path='/' component={Cards}/>
+          <Route exact path='/news/:id' children={<CurrentNewsContainer/>}/>
+        </Switch>
+      </Router>
     </div>
   );
 }
