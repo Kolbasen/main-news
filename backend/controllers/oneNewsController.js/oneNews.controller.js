@@ -2,6 +2,8 @@ const { getOneNews } = require('../../services/news/news.service');
 
 async function oneNewsController(req, res) {
     const { id } = req.params;
+    console.log('ID IS HERE')
+    console.log(id)
     try {
         const result = await getOneNews(id);
         if (result.errors) {
