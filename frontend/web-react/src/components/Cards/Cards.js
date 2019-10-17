@@ -1,21 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom'
-import { connect } from 'react-redux';
 import AddForm from '../AddForm/AddForm'
 import { Card, CardActionArea, CardMedia, CardContent, Typography, Button} from '@material-ui/core';
 import useStyles from './style'
 import photo from '../../static/nature.jpg'
-import { setCurrentNews } from '../../store/currentNews/actions'
-import { setCards } from '../../store/cards/actions'
 import { getTenCards, sendCard } from '../../helpers/apiHelpers'
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper'
 
 
 
 function Cards(props) {
+    const { cards, setCards, setCurrentNews } = props;
     const history = useHistory()
     const classes = useStyles();
-    const { cards, setCurrentNews, setCards } = props;
     const [redirect, setRedirect] = useState({flag: false, endpoint: ''})
     const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
     const [isLoading, setIsLoading] = useState(true);
@@ -61,12 +58,13 @@ function Cards(props) {
             }
         }
         fetchStartingData();
+        
     }, []) 
 
     if (isLoading) return <h1>Is Loading...</h1>
 
     if (redirect.flag) return <Redirect to={`/news/${redirect.endpoint}`}/>
-    console.log(cards)
+    console.log(redirect.endpoint)
     return(
         <div style={{marginTop: '80px'}}>
             <AddForm submitNews={submitNews} addingNews={addingNews}/>
@@ -77,6 +75,7 @@ function Cards(props) {
             <div key={id} className={classes.items}>
          <Card className={classes.card}>
              <CardActionArea onClick={() => {
+                    console.log(value.id)
                     setCurrentNews(value.id)
                     setRedirect({flag: true, endpoint: value.id}); 
                     history.push('/')
@@ -100,16 +99,4 @@ function Cards(props) {
     );
 }
 
-const mapStateToProps = state => {
-    console.log(state)
-    return {
-    cards: state.cards.cards,
-    id: state.id.id
-}}
-
-const mapActionsToProps = {
-    setCurrentNews,
-    setCards
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(Cards);
+export default Cards
