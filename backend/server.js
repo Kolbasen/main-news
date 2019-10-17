@@ -5,6 +5,8 @@ const app = express();
 const hotNewsRouter = require('./routes/hotNews/hotNews');
 const oneNewsRouter = require('./routes/oneNews/oneNews');
 const mainPageRouter = require('./routes/mainPage/mainPage');
+const tagNewsRouter = require('./routes/tagNews/tagNews')
+const amdminRouter = require('./routes/admin/admin')
 
 const bodyParser = require('body-parser');
 
@@ -39,5 +41,9 @@ app.use('/', mainPageRouter);
 app.use('/news', oneNewsRouter);
 
 app.use('/hotnews', hotNewsRouter);
+
+app.use('/tags', tagNewsRouter);
+
+app.use('/admin', amdminRouter);
 
 app.listen(8000);

@@ -10,24 +10,24 @@ const useInfiniteScroll = callback => {
       inDebounce = setTimeout(() => {
         func.apply(this, arguments);
       }, delay);
-    }
-  }
+    };
+  };
 
   useEffect(() => {
     window.addEventListener('scroll', debounce(handleScroll, 500));
     return () => window.removeEventListener('scroll', debounce(handleScroll, 500));
-  }, []);
+  }, [handleScroll]);
 
   useEffect(() => {
     if (!isFetching) return;
     callback();
-  }, [isFetching]);
+  }, [callback, isFetching]);
 
   function handleScroll() {
     if (window.innerHeight + Math.max(
-        window.pageYOffset,
-        document.documentElement.scrollTop,
-        document.body.scrollTop
+      window.pageYOffset,
+      document.documentElement.scrollTop,
+      document.body.scrollTop
     ) < document.documentElement.offsetHeight - 10 || isFetching) return;
     setIsFetching(true);
   }

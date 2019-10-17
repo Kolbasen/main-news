@@ -66,9 +66,21 @@ const getLastNewsFromTags = async () => {
    }
 }
 
+const getNewsFromOneTag = async tag => {
+  try {
+    const res = await News.findAll({where: {tags: tag}, raw: true})
+    console.log(res)
+    return res
+  } catch (error) {
+    console.log('Tag news finding error')
+    console.log(error)
+  }
+}
+
 module.exports = {
   getNews,  
   insertNews,
   getOneNews,
-  getLastNewsFromTags
+  getLastNewsFromTags,
+  getNewsFromOneTag
 };
