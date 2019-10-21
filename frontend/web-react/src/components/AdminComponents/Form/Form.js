@@ -1,28 +1,42 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button, TextareaAutosize  } from '@material-ui/core';
 import useStyles from './style';
+import { getToken } from '../../../helpers/tokenHelpers';
 
 
 export default function AddForm(props) {
-  const { submitNews, addingNews } = props;
+  const { value, submitData, addingNews, setAddingNews } = props;
   const classes = useStyles(); 
-  const [header, setHeader] = useState('');
-  const [tags, setTags] = useState('');
-  const [text, setText] = useState('');
+  const [header, setHeader] = useState(value.name);
+  const [tags, setTags] = useState(value.tags);
+  const [text, setText] = useState(value.text);
+  const [token, setToken] = useState(getToken());
+  const [editingNews, setEditingNews] = useState(false)
 	
   return (
     <Container component='main'>
       <CssBaseline/>
+      <button onClick={() => {
+            setEditingNews((prevState) => !prevState)
+      }}>
+        Edit news
+      </button>
+      <button onClick={() => {submitData(value.id, header, tags, text, 'delete', token)}}>Delete news</button>
       <Slide 
         direction='up' 
-        in={addingNews} 
+        in={editingNews || addingNews} 
         mountOnEnter 
         unmountOnExit
       >
         <div className={classes.elements}>
           <Typography>
-                    Add New Marker
+            Add New Marker 
           </Typography>
+          <button onClick={() => {
+            addingNews ?
+            setAddingNews(false) :
+            setEditingNews(false)
+          }}>Close</button>
           <form className={classes.form}>
             <Grid>
               <TextField
@@ -58,18 +72,30 @@ export default function AddForm(props) {
               />
             </Grid>
             <Grid>
+              {
+                addingNews ? 
+                <Button 
+                className={classes.input} 
+                color='secondary' 
+                variant='contained' 
+                onClick={() => {
+                  submitData(value.id, header, tags, text, 'add', token);
+                  setAddingNews(false)
+                }}>
+								Save Info
+              </Button> 
+              :
               <Button 
                 className={classes.input} 
                 color='secondary' 
                 variant='contained' 
                 onClick={() => {
-                  submitNews(header, tags, text);
-                  setHeader('');
-                  setText('');
-                  setTags('');
+                  submitData(value.id, header, tags, text, 'edit', token);
+                  setEditingNews(false)
                 }}>
-								Save Info
-              </Button>
+								Edit Info
+              </Button> 
+            }
             </Grid>
           </form>
         </div>

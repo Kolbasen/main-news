@@ -22,7 +22,7 @@ function HotNews(props) {
       <Card className={classes.card}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-                                Hot news
+              Hot news
           </Typography>
         </CardContent>
       </Card>

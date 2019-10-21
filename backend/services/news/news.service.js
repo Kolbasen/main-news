@@ -27,6 +27,31 @@ const getNews = async () => {
   }
 }
 
+const updateNews = async (id, name, text, tags) => {
+  console.log(id, name, text, tags)
+  try {
+    const res = await News.update({
+      name, 
+      text,
+      tags
+    }, {
+      where: {id: id}, 
+    })
+    return res;
+  } catch (error) {
+    console.log('Updating news error')
+  }
+}
+
+const deleteNews = async id => {
+  try {
+    const res = await News.destroy({where: {id: id}});
+    return res;
+  } catch (error) {
+    console.log('Deleting error')
+  }
+}
+
 const getOneNews = async id => {
   try {
     const res = await News.findOne({where: {id: id}, raw: true })
@@ -82,5 +107,7 @@ module.exports = {
   insertNews,
   getOneNews,
   getLastNewsFromTags,
-  getNewsFromOneTag
+  getNewsFromOneTag,
+  updateNews, 
+  deleteNews
 };

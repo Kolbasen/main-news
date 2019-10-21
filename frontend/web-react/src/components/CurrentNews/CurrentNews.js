@@ -12,20 +12,17 @@ import { setCurrentNews } from '../../store/currentNews/actions';
 
 function CurrentNews(props) {
   const classes = useStyles();
-  const params = useParams()
-  console.log(params)
+  const params = useParams();
   const { id } = params;
-  // console.log('Remounted current news')
   const { setHotNews } = props;
   const [card, setCard] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  console.log(id);
+
   useEffect(() => {
     setIsLoading(true);
     const fetchOneNews = async id => {
       try {
         const [oneNews, hotNews] = await Promise.all([getOneNews(id), getHotNews()]);
-        // console.log(oneNews, hotNews)
         if (oneNews.success && hotNews.success) {
           setHotNews(hotNews.entity);
           setCard(oneNews.entity);
