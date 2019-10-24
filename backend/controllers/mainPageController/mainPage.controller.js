@@ -7,6 +7,9 @@ async function mainPageController(req, res) {
         const result = await getNews();
         result.reverse();
         console.log(result);
+        for (let news of result) {
+            news.photo = `static/${news['photo.name']}`
+        }
         res.status(200).json(result)
     } catch (error) {
         console.log('Catched error: ')

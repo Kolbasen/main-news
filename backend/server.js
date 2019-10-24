@@ -17,6 +17,7 @@ sequelize.sync().then(result=>{
 })
 .catch(err=> console.log(1));
 
+app.use('/static', express.static('static'))
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json())
 
@@ -44,6 +45,6 @@ app.use('/hotnews', hotNewsRouter);
 
 app.use('/tags', tagNewsRouter);
 
-app.use('/admin', amdminRouter);
+app.use('/admin' ,amdminRouter);  
 
 app.listen(8000);
