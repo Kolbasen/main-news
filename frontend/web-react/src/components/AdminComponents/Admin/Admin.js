@@ -1,42 +1,81 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Redirect } from 'react-router-dom';
 import Form from '../Form/Form';
 // import Info from '../Info/Info'
-import { sendCard, getCards, editCard, deleteCard } from '../../../helpers/apiHelpers';
+import { sendCard, getCards, editCard, deleteCard, sendPhoto } from '../../../helpers/apiHelpers';
 import { getToken } from '../../../helpers/tokenHelpers';
 
 export default function Admin() {
   const [isLoading ,setIsLoading] = useState(true);
   const [cards, setCards] = useState(null);
-  const [data, setData] = useState({})
   const [addingNews, setAddingNews] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  const addNews = async (header, tags, text, token) => {
-    const result = await sendCard(header, tags, text, token);
-    console.log(result)
+  const addNews = async (header, tags, text, photo, token) => {
+    console.log(header, tags, text, photo, token)
+    const formData = new FormData();
+    formData.append('header', header)
+    formData.append('tags', tags);
+    formData.append('text', text);
+    formData.append('photo', photo);
+    try {
+      const result = await sendCard(formData, token);
+      console.log(result);
+    } catch (error) {
+      console.log('API call error:', error);
+    }
   };
 
-  const editNews = async (id ,header, tags, text, token) => {
-    const result = await editCard(id, header, tags, text, token)
-    console.log(result)
-  }
+  const editNews = async (id ,header, tags, text, photo, token) => {
+    const formData = new FormData();
+    formData.append('id', id)
+    formData.append('header', header)
+    formData.append('tags', tags);
+    formData.append('text', text);
+    formData.append('photo', photo);
+    try {
+      const result = await editCard(formData, token);
+      console.log(result);
+    } catch (error) {
+      console.log('API call error:', error);
+    }
+  };
 
   const deleteNews = async (id, token) => {
-    const result = await deleteCard(id, token)
-    console.log(result)
-  }
+    try {
+      const result = await deleteCard(id, token);
+      console.log(result);
+    } catch (error) {
+      console.log('API call error:', error);
+    }
+  };
 
-  const submitData = (id, header, tags, text, type, token) => {
-    
+  // const uploadPhoto = async (id, photo, token) => {
+  //   const formData = new FormData();
+  //   formData.append('id', id);
+  //   formData.append('photo', photo);
+  //   formData.append('token', token)
+  //   console.log(photo)
+  //   try {
+  //     const result = await sendPhoto(formData)
+  //     console.log(result)
+  //   } catch (error) {
+  //     console.log('Photo upload error', error)
+  //   }
+  // }; 
+
+  const submitData = (id, header, tags, text, type, photo, token) => {
     if (type === 'add') {
-      addNews(header, tags, text, token)
+      // console.log(header, tags, text, photo, token)
+      // if (photo) uploadPhoto(id, photo, token);
+      addNews(header, tags, text, photo, token);
     }
     if (type === 'edit') {
-      editNews(id ,header, tags, text, token)
+      // if (photo) uploadPhoto(id, photo, token);
+      editNews(id ,header, tags, text, photo, token);
     }
     if (type === 'delete') {
-      deleteNews(id)
+      deleteNews(id, token);
     }
   };
 
@@ -62,7 +101,7 @@ export default function Admin() {
 
   if (isLoading) return <h1>Is Loading...</h1>;
 
-  if (redirect) return <Redirect to='/adminlogin'/>
+  if (redirect) return <Redirect to='/adminlogin'/>;
 
   return (
     <div>
@@ -76,12 +115,13 @@ export default function Admin() {
       {
         cards.map((value) => (
           <div key={value.id}>
-          <div style={{display: 'flex', alignItems: 'center '}}>
-            <h2>{value.name}</h2>
-            <p>{value.text}</p>
+            <div style={{display: 'flex', alignItems: 'center '}}>
+              <img src={`http://localhost:8000/${value.photo}`} height='100' width='100'/>
+              <h2>{value.name}</h2>
+              <p>{value.text}</p>
+            </div>
+            <Form submitData={submitData} value={value} />
           </div>
-          <Form submitData={submitData} value={value}/>
-        </div>
         ))
       }
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useRef } from 'react'; 
 import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button, TextareaAutosize  } from '@material-ui/core';
 import useStyles from './style';
 import { getToken } from '../../../helpers/tokenHelpers';
@@ -11,17 +11,19 @@ export default function AddForm(props) {
   const [tags, setTags] = useState(value.tags);
   const [text, setText] = useState(value.text);
   const [token, setToken] = useState(getToken());
-  const [editingNews, setEditingNews] = useState(false)
-	
+  const [editingNews, setEditingNews] = useState(false);
+  const photo = useRef(null);
+
+  // console.log(photo.current.files[0])
   return (
     <Container component='main'>
       <CssBaseline/>
       <button onClick={() => {
-            setEditingNews((prevState) => !prevState)
+        setEditingNews((prevState) => !prevState);
       }}>
         Edit news
       </button>
-      <button onClick={() => {submitData(value.id, header, tags, text, 'delete', token)}}>Delete news</button>
+      <button onClick={() => {submitData(value.id, header, tags, text, 'delete', photo, token);}}>Delete news</button>
       <Slide 
         direction='up' 
         in={editingNews || addingNews} 
@@ -34,10 +36,18 @@ export default function AddForm(props) {
           </Typography>
           <button onClick={() => {
             addingNews ?
-            setAddingNews(false) :
-            setEditingNews(false)
+              setAddingNews(false) :
+              setEditingNews(false);
           }}>Close</button>
           <form className={classes.form}>
+            <Grid>
+              <input type='file' ref={photo}/>
+              {/* <Button className={classes.input} onClick={() => {
+                uploadPhoto(photo.current.files[0], token)
+              }}>
+                Save file
+              </Button> */}
+            </Grid>
             <Grid>
               <TextField
                 className={classes.input}
@@ -55,7 +65,6 @@ export default function AddForm(props) {
                 label='Tags'
                 onChange={({target}) => setTags(target.value)}
                 value={tags}
-                autoFocus
                 fullWidth
                 required
               />
@@ -66,7 +75,6 @@ export default function AddForm(props) {
                 label='Text'
                 onChange={({target}) => setText(target.value)}
                 value={text}
-                autoFocus
                 fullWidth
                 required
               />
@@ -74,28 +82,28 @@ export default function AddForm(props) {
             <Grid>
               {
                 addingNews ? 
-                <Button 
-                className={classes.input} 
-                color='secondary' 
-                variant='contained' 
-                onClick={() => {
-                  submitData(value.id, header, tags, text, 'add', token);
-                  setAddingNews(false)
-                }}>
+                  <Button 
+                    className={classes.input} 
+                    color='secondary' 
+                    variant='contained' 
+                    onClick={() => {
+                      submitData(value.id, header, tags, text, 'add', photo.current.files[0], token);
+                      setAddingNews(false);
+                    }}>
 								Save Info
-              </Button> 
-              :
-              <Button 
-                className={classes.input} 
-                color='secondary' 
-                variant='contained' 
-                onClick={() => {
-                  submitData(value.id, header, tags, text, 'edit', token);
-                  setEditingNews(false)
-                }}>
+                  </Button> 
+                  :
+                  <Button 
+                    className={classes.input} 
+                    color='secondary' 
+                    variant='contained' 
+                    onClick={() => {
+                      submitData(value.id, header, tags, text, 'edit', photo.current.files[0], token);
+                      setEditingNews(false);
+                    }}>
 								Edit Info
-              </Button> 
-            }
+                  </Button> 
+              }
             </Grid>
           </form>
         </div>

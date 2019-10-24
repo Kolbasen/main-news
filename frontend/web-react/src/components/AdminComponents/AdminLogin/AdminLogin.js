@@ -21,17 +21,17 @@ import useStyles from './style';
 export default function AdminLogin () {
   const classes = useStyles();
   const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
 
   const handleSubmit = async (username, password, e) => {
-	setSubmitting(true);
-	const data = { username, password }
+    setSubmitting(true);
+    const data = { username, password };
     try {
       const result = await loginQuery(data);
-      console.log(result)
+      console.log(result);
       if (result.success) {
         if (result.entity.token) {
           setToken(result.entity.token);
@@ -92,9 +92,9 @@ export default function AdminLogin () {
               color='primary'
 			  variant='contained'
 			  onClick={(e) => {
-          e.preventDefault()
-          handleSubmit(username, password)
-        }}
+                e.preventDefault();
+                handleSubmit(username, password);
+              }}
             >
               {
                 submitting ? 
