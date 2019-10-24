@@ -2,20 +2,14 @@ import React, { useState } from 'react';
 import { Redirect, useHistory, useLocation, useParams } from 'react-router-dom';
 import { Card, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
 import useStyle from './style';
-import { connect } from 'react-redux';
-import { setCards } from '../../store/cards/actions';
-import { setHotNews } from '../../store/hotNews/actions';
-import {  setCurrentNews } from '../../store/currentNews/actions';
+
 
 function HotNews(props) {
-  const { id } = useParams();
-  console.log(id);
-  const location = useLocation();
+  const { hotNews, setCurrentNews } = props;
+  const params = useParams();
   const history = useHistory();
   const classes = useStyle();
-  const [redirect, setRedirect] = useState({flag: false, endpoint: ''});
-  const { hotNews, setCurrentNews } = props;
-  if (redirect.flag) return <Redirect to={`/news/${redirect.endpoint}`}/>;
+  // const [redirect, setRedirect] = useState({flag: false, endpoint: ''});
 
   return (
     <div>
@@ -27,13 +21,13 @@ function HotNews(props) {
         </CardContent>
       </Card>
       {
-        hotNews.map((value) => (    
-          <Card className={classes.card} key={value.id}>
+        hotNews.map((value, id) => (    
+          <div key={id}>
+          <Card className={classes.card}>
             <CardActionArea onClick={() => {
-              console.log(value.id);
-              // history.push(location.pathname)
+              console.log(history.id)
               setCurrentNews(value.id);
-              setRedirect({flag: true, endpoint: value.id}); 
+              history.push(`/news/${value.id}`) 
             }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
@@ -42,23 +36,14 @@ function HotNews(props) {
               </CardContent>
             </CardActionArea>
           </Card>
+          </div>
         ))
       }
     </div>
   );
 }
 
-const mapStateToProps = state => ({
-  cards: state.cards.cards,
-  id: state.id.id,
-  hotNews: state.hotNews.hotNews
-});
-
-const mapActionsToProps = {
-  setCurrentNews,
-  setCards,
-  setHotNews
-};
 
 
-export default connect(mapStateToProps, mapActionsToProps)(HotNews);
+
+export default HotNews;
