@@ -4,18 +4,15 @@ const { secret } = require('../../config/config')
 
 
 async function adminController(req, res) {
-    const { token } = req.params;
-    console.log(token)
     try {
-        const { admin } = await jwt.verify(token, secret)
-        if (admin) {
-            const result = await getNews();
-            result.reverse();
-            console.log(result);
-            res.status(200).json(result)
-        } else {
-            res.send(400).json({error: 'You not allowed to see this page!'})
+        const result = await getNews();
+        result.reverse();
+        console.log(result[0]);
+        for (let news of result) {
+            news.photo = `static/${news['photo.name']}`
         }
+        console.log(result)
+        res.status(200).json(result)
     } catch (error) {
         console.log('Catched error: ')
         res.status(400).json('No token provided!')

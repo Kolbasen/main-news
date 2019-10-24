@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Card, CardActionArea, CardMedia, CardContent, Typography} from '@material-ui/core';
-import HotNews from '../HotNews/HotNews';
+import { Card, CardMedia, CardContent, Typography} from '@material-ui/core';
+import HotNewsContainer from '../HotNews/HotNewsContainer'
 import useStyles from './style';
-import photo from '../../static/nature.jpg';
 import { getOneNews, getHotNews } from '../../helpers/apiHelpers';
 import { connect } from 'react-redux';
 import {setCards} from '../../store/cards/actions';
@@ -39,14 +38,14 @@ function CurrentNews(props) {
   }, [id, setHotNews]);
 
   if (isLoading) return <div>Is Loading...</div>;
-
+  console.log(card)
   return (
     <div className={classes.container}>
       <div className={classes.items}>
         <Card className={classes.card}>
           <CardMedia
             className={classes.media}
-            image={photo}
+            image={`http://localhost:8000/static/${card.photo}`}
             title="Contemplative Reptile"
           />
         </Card>
@@ -66,7 +65,7 @@ function CurrentNews(props) {
         </Card>
       </div>
       <div style={{marginLeft: '30px'}}>
-        <HotNews/>
+        <HotNewsContainer/>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const { secret } = require('../../config/config')
 async function loginController(req, res) {
     const { username, password } = req.body;
     // console.log(token)
-    console.log(1)
+    console.log(username, password)
     try {
         //only for tests
         // const hash = await encryptePasswd(password)

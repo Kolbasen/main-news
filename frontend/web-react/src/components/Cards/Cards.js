@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Card, CardActionArea, CardMedia, CardContent, Typography, Button} from '@material-ui/core';
 import useStyles from './style';
-import photo from '../../static/nature.jpg';
-import { getTenCards, sendCard } from '../../helpers/apiHelpers';
+import { getTenCards } from '../../helpers/apiHelpers';
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper';
 
 
@@ -12,24 +11,8 @@ function Cards(props) {
   const { cards, setCards, setCurrentNews } = props;
   const history = useHistory();
   const classes = useStyles();
-  const [redirect, setRedirect] = useState({flag: false, endpoint: ''});
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [isLoading, setIsLoading] = useState(true);
-  const [addingNews, setAddingNews] = useState(false);
-
-  const submitNews = (header, tags, text) => {
-    const sendData = async () => {
-      const data = {
-        header,
-        tags,
-        text
-      };
-      const result = await sendCard(data);
-      console.log(result);
-      setAddingNews(false);
-    };
-    sendData();
-  };
 
   function fetchMoreListItems() {
     const fetchingMoreCards = async () => {
@@ -62,22 +45,18 @@ function Cards(props) {
 
   if (isLoading) return <h1>Is Loading...</h1>;
 
-  if (redirect.flag) return <Redirect to={`/news/${redirect.endpoint}`}/>;
-  console.log(redirect.endpoint);
   return(
     <div style={{marginTop: '80px'}}>
       {cards.map((value, id) => (
         <div key={id} className={classes.items}>
           <Card className={classes.card}>
             <CardActionArea onClick={() => {
-              console.log(value.id);
               setCurrentNews(value.id);
-              setRedirect({flag: true, endpoint: value.id}); 
-              history.push('/');
+              history.push(`/news/${value.id}`);
             }}>
               <CardMedia
                 className={classes.media}
-                image={photo}
+                image={`http://localhost:8000/${value.photo}`}
                 title="Contemplative Reptile"
               />
               <CardContent>

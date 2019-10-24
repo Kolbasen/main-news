@@ -22,9 +22,22 @@ const News = sequelize.define('news', {
       }
 })
 
+const Photo = sequelize.define('photo', {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+    allowNull: false
+  },
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+})
 
-
+News.hasOne(Photo, { onDelete: "cascade"})
 
 module.exports = {
     News,
+    Photo
 }

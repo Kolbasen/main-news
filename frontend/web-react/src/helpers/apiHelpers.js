@@ -8,54 +8,60 @@ const getTenCards = async () => {
 };
 
 const getCards = async token => {
-  const endpoint = `${token}`
+  const endpoint = ``;
   const url = `${API_URL}/admin/${endpoint}`;
-  const result = await fetch(url);
+  const result = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    }
+  });
   console.log(result);   
   return extractResult(result);
 }; 
 
-const sendCard = async (header, tags, text, token) => {
+const sendCard = async (formData, token) => {
   const endpoint = 'admin/add';
   const url = `${API_URL}/${endpoint}`;
-  const data = { header, tags, text, token }
+  console.log(formData)
   const result = await fetch(url, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    body: JSON.stringify(data)
+    body: formData
   });
   return extractResult(result);
 };
 
-const editCard = async (id, header, text, tags, token) => {
-  const endpoint = `admin/edit`
-  const url = `${API_URL}/${endpoint}`
-  const data = { id, header, text, tags, token }
+const editCard = async (formData, token) => {
+  console.log(token)
+  const endpoint = 'admin/edit';
+  const url = `${API_URL}/${endpoint}`;
   const result = await fetch(url, {
     method: 'PUT',
     headers: {
-      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    body: JSON.stringify(data)
-  })
-  return extractResult(result)
-}
+    body: formData
+  });
+  return extractResult(result);
+};
 
 const deleteCard = async (id, token) => {
-  const endpoint = `admin/delete`
-  const url = `${API_URL}/${endpoint}`
+  const endpoint = 'admin/delete';
+  const url = `${API_URL}/${endpoint}`;
   const result = await fetch(url, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`,
     },
-    body: JSON.stringify({id , token})
-  })
+    body: JSON.stringify({id})
+  });
   // return extractResult(result)
   return result;  
-}
+};
 
 const getOneNews = async id => {
   const endpoint = `news/${id}`;
@@ -79,7 +85,7 @@ const getTagNews = async tag => {
 };
 
 const loginQuery = async (data) => {
-  const endpoint = `admin/login`;
+  const endpoint = 'admin/login';
   const url = `${API_URL}/${endpoint}`;
   const result = await fetch(url, {
     method: 'POST',
@@ -87,10 +93,23 @@ const loginQuery = async (data) => {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data)
-  })
-  return extractResult(result)
-}
+  });
+  return extractResult(result);
+};
 
+const sendPhoto = async formData => {
+  const endpoint = 'photo/upload';
+  const url = `${API_URL}/${endpoint}`;
+  const result = await fetch(url, {
+      method: 'PUT',
+      body: formData
+  });
+  return extractResult(result)
+};
+
+const getPhoto = async () => {
+
+};
 const extractResult = async result => {
   const entity = await result.json();
   const success = result.statusText === 'OK';
@@ -106,5 +125,7 @@ export {
   getOneNews,
   getHotNews,
   getTagNews,
-  loginQuery
+  loginQuery,
+  sendPhoto,
+  getPhoto
 };
