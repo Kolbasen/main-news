@@ -18,14 +18,11 @@ function CardsContainer(props) {
 
 const mapStateToProps = state => ({
   cards: state.cards.cards,
-  id: state.id.id,
-  hotNews: state.hotNews.hotNews
 });
 
 const mapActionsToProps = {
   setCurrentNews,
   setCards,
-  setHotNews
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(CardsContainer);
