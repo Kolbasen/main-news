@@ -41,7 +41,7 @@ function Cards(props) {
     };
     fetchStartingData();
         
-  }, [setCards]); 
+  }, []); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
 
@@ -61,7 +61,7 @@ function Cards(props) {
               />
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {value.name}
+                  {value.shortHeader}
                 </Typography>
               </CardContent>
             </CardActionArea>

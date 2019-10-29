@@ -9,7 +9,7 @@ async function adminController(req, res) {
         result.reverse();
         console.log(result[0]);
         for (let news of result) {
-            news.photo = `static/${news['photo.name']}`
+            news.photo = `static/${news['photo.filename']}`
         }
         console.log(result)
         res.status(200).json(result)

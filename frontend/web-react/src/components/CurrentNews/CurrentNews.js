@@ -35,7 +35,7 @@ function CurrentNews(props) {
       }
     }; 
     fetchOneNews(id);
-  }, [id, setHotNews]);
+  }, []);
 
   if (isLoading) return <div>Is Loading...</div>;
   console.log(card)
@@ -52,7 +52,7 @@ function CurrentNews(props) {
         <Card className={classes.card}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
-              {card.name}
+              {card.header}
             </Typography>
           </CardContent>
         </Card>

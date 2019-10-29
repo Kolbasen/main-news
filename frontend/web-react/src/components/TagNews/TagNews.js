@@ -9,6 +9,7 @@ export default function TagNews(props) {
   const params = useParams();
   const history = useHistory();
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(true)
   
   useEffect(() => {
     const fetchTagNews = async tag => {
@@ -17,11 +18,14 @@ export default function TagNews(props) {
       if (result.success) {
         setCards(result.entity);
         console.log(cards);
+        setIsLoading(false)
       }
     };
     fetchTagNews(params.tag);
   }, []);
 
+  if (isLoading) return <h1 style={{marginTop: '70px'}}>Is Loading...</h1>
+  
   return (
     <div style={{marginTop: '70px'}}>
       {
@@ -39,7 +43,7 @@ export default function TagNews(props) {
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {value.name}
+                    {value.shortHeader}
                   </Typography>
                 </CardContent>
               </CardActionArea>

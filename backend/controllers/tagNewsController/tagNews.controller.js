@@ -4,7 +4,7 @@ async function TagNewsController(req, res)  {
     const { tag } = req.params;
     try {
         const result = await getNewsFromOneTag(tag);
-        result.map((value) => value.photo = value['photo.name'])
+        result.map((value) => value.photo = value['photo.filename'])
         return res.status(200).json(result)
     } catch (error) {
         console.log('One tag sending error')

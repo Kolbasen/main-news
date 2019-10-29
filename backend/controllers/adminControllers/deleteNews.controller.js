@@ -11,7 +11,7 @@ async function deleteNewsController(req, res) {
     try {
         const result = await deleteNews(id)
         console.log(result)
-        const oldPhoto = result.oldFilename.dataValues.name;
+        const oldPhoto = result.oldFilename.dataValues.filename;
         fs.unlink(`./static/${oldPhoto}`, (err) => {
             console.log(err)
         });

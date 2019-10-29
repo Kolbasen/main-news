@@ -7,7 +7,8 @@ import { getToken } from '../../../helpers/tokenHelpers';
 export default function AddForm(props) {
   const { value, submitData, addingNews, setAddingNews } = props;
   const classes = useStyles(); 
-  const [header, setHeader] = useState(value.name);
+  const [header, setHeader] = useState(value.header);
+  const [shortHeader, setShortHeader] = useState(value.shortHeader)
   const [tags, setTags] = useState(value.tags);
   const [text, setText] = useState(value.text);
   const [token, setToken] = useState(getToken());
@@ -23,7 +24,12 @@ export default function AddForm(props) {
       }}>
         Edit news
       </button>
-      <button onClick={() => {submitData(value.id, header, tags, text, 'delete', photo, token);}}>Delete news</button>
+      <button onClick={() => {
+        submitData(value.id, shortHeader ,header, tags, text, 'delete', photo, token);
+       }
+      }>
+        Delete news
+      </button>
       <Slide 
         direction='up' 
         in={editingNews || addingNews} 
@@ -47,6 +53,17 @@ export default function AddForm(props) {
               }}>
                 Save file
               </Button> */}
+            </Grid>
+            <Grid>
+              <TextField
+                className={classes.input}
+                label='Short Header'
+                onChange={({target}) => setShortHeader(target.value)}
+                value={shortHeader}
+                autoFocus
+                fullWidth
+                required
+              />
             </Grid>
             <Grid>
               <TextField
@@ -87,7 +104,11 @@ export default function AddForm(props) {
                     color='secondary' 
                     variant='contained' 
                     onClick={() => {
-                      submitData(value.id, header, tags, text, 'add', photo.current.files[0], token);
+                      submitData(value.id, shortHeader,header, tags, text, 'add', photo.current.files[0], token);
+                      setShortHeader('');
+                      setHeader('');
+                      setTags('')
+                      setText('')
                       setAddingNews(false);
                     }}>
 								Save Info
@@ -98,7 +119,7 @@ export default function AddForm(props) {
                     color='secondary' 
                     variant='contained' 
                     onClick={() => {
-                      submitData(value.id, header, tags, text, 'edit', photo.current.files[0], token);
+                      submitData(value.id, shortHeader ,header, tags, text, 'edit', photo.current.files[0], token);
                       setEditingNews(false);
                     }}>
 								Edit Info

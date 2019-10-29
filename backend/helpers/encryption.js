@@ -1,9 +1,8 @@
 'use strict'
 const bcrypt = require('bcrypt')
-const { saltRounds } = require('../config/config')
 
 const encryptePasswd = async password => {
-    const hash = await bcrypt.hash(password, saltRounds)
+    const hash = await bcrypt.hash(password, process.env.SALT_ROUNDS)
     return hash;
 }
 

@@ -1,14 +1,15 @@
 const { News, Photo } = require('../../models/news');
 
-const insertNews = async (name, tags, text, filename) => {
+const insertNews = async (shortHeader, header, tags, text, filename) => {
   try {
     const info = await News.create({
-      name: name,
-      tags: tags,
-      text: text,
+      shortHeader,
+      header,
+      tags,
+      text,
     })
     const photo = await Photo.create({
-      name: filename
+      filename
     })
     const res = await info.setPhoto(photo);
     return res;
@@ -21,7 +22,7 @@ const insertNews = async (name, tags, text, filename) => {
 
 const getNews = async () => {
   try {
-    const res = await News.findAll({ raw: true, include:[{model: Photo, attributes: ['name', 'newsId'] }]});
+    const res = await News.findAll({ raw: true, include:[{model: Photo, attributes: ['filename', 'newsId'] }]});
     // console.log(res);
     return res;
   } catch (error) {
@@ -31,26 +32,30 @@ const getNews = async () => {
   }
 }
 
-const updateNews = async (id, name, text, tags, filename) => {
-  console.log(id, name, text, tags, filename)
+const updateNews = async (id, shortHeader, header, text, tags, filename) => {
+  console.log(id, shortHeader, header, text, tags, filename)
   try {
       const info = await News.update({
-        name, 
+        shortHeader,
+        header, 
         text,
         tags
       }, {
         where: {id: id}, 
       })
-      const oldFilename = await Photo.findOne({
-        where: {newsId: id}
-      })
-      const photo = await Photo.update({
-        name: filename
-      }, {
-        where: { newsId: id },
-      })
-      const res = { info, photo, oldFilename }
-      return res;
+      if (filename) {
+        const oldFilename = await Photo.findOne({
+          where: {newsId: id}
+        })
+        const photo = await Photo.update({
+          filename
+        }, {
+          where: { newsId: id },
+        })
+        const res = { info, photo, oldFilename }
+        return res;
+      }
+      return { info }
   } catch (error) {
     console.log('Updating news error')
   }
@@ -108,7 +113,7 @@ const getLastNewsFromTags = async () => {
 
 const getNewsFromOneTag = async tag => {
   try {
-    const info = await News.findAll({where: {tags: tag}, include:[{model: Photo, attributes: ['name', 'newsId'] }], raw: true})
+    const info = await News.findAll({where: {tags: tag}, include:[{model: Photo, attributes: ['filename', 'newsId'] }], raw: true})
     return info
   } catch (error) {
     console.log('Tag news finding error')
