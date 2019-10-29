@@ -11,9 +11,10 @@ export default function Admin() {
   const [addingNews, setAddingNews] = useState(false);
   const [redirect, setRedirect] = useState(false);
 
-  const addNews = async (header, tags, text, photo, token) => {
+  const addNews = async (shortHeader,header, tags, text, photo, token) => {
     console.log(header, tags, text, photo, token)
     const formData = new FormData();
+    formData.append('shortHeader', shortHeader);
     formData.append('header', header)
     formData.append('tags', tags);
     formData.append('text', text);
@@ -26,10 +27,11 @@ export default function Admin() {
     }
   };
 
-  const editNews = async (id ,header, tags, text, photo, token) => {
+  const editNews = async (id, shortHeader, header, tags, text, photo, token) => {
     const formData = new FormData();
-    formData.append('id', id)
-    formData.append('header', header)
+    formData.append('id', id);
+    formData.append('shortHeader', shortHeader);
+    formData.append('header', header);
     formData.append('tags', tags);
     formData.append('text', text);
     formData.append('photo', photo);
@@ -50,29 +52,13 @@ export default function Admin() {
     }
   };
 
-  // const uploadPhoto = async (id, photo, token) => {
-  //   const formData = new FormData();
-  //   formData.append('id', id);
-  //   formData.append('photo', photo);
-  //   formData.append('token', token)
-  //   console.log(photo)
-  //   try {
-  //     const result = await sendPhoto(formData)
-  //     console.log(result)
-  //   } catch (error) {
-  //     console.log('Photo upload error', error)
-  //   }
-  // }; 
-
-  const submitData = (id, header, tags, text, type, photo, token) => {
+  const submitData = (id, shortHeader, header, tags, text, type, photo, token) => {
+    console.log(id, header,shortHeader, tags, text, type, photo, token)
     if (type === 'add') {
-      // console.log(header, tags, text, photo, token)
-      // if (photo) uploadPhoto(id, photo, token);
-      addNews(header, tags, text, photo, token);
+      addNews(shortHeader, header, tags, text, photo, token);
     }
     if (type === 'edit') {
-      // if (photo) uploadPhoto(id, photo, token);
-      editNews(id ,header, tags, text, photo, token);
+      editNews(id ,shortHeader ,header, tags, text, photo, token);
     }
     if (type === 'delete') {
       deleteNews(id, token);
@@ -95,8 +81,7 @@ export default function Admin() {
         console.log('Something went wrong');
       }
     };
-    fetchStartingData();
-        
+    fetchStartingData();    
   }, []); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
@@ -108,7 +93,7 @@ export default function Admin() {
       <button onClick={() => setAddingNews(prevState => !prevState)}>Add news</button>
       <Form 
         submitData={submitData} 
-        value={{id: null, header: '', tags: '', text: ''}} 
+        value={{id: null, shortHeader: '', header: '', tags: '', text: ''}} 
         addingNews={addingNews}
         setAddingNews={setAddingNews}
       />
@@ -117,8 +102,9 @@ export default function Admin() {
           <div key={value.id}>
             <div style={{display: 'flex', alignItems: 'center '}}>
               <img src={`http://localhost:8000/${value.photo}`} height='100' width='100'/>
-              <h2>{value.name}</h2>
-              <p>{value.text}</p>
+              <p>{value.shortHeader} </p>
+              <h2>{value.header} </h2>
+              <p>{value.text} </p>
             </div>
             <Form submitData={submitData} value={value} />
           </div>

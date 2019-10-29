@@ -6,10 +6,8 @@ import useStyle from './style';
 
 function HotNews(props) {
   const { hotNews, setCurrentNews } = props;
-  const params = useParams();
   const history = useHistory();
   const classes = useStyle();
-  // const [redirect, setRedirect] = useState({flag: false, endpoint: ''});
 
   return (
     <div>
@@ -31,7 +29,7 @@ function HotNews(props) {
             }}>
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
-                  {value.name}
+                  {value.shortHeader}
                 </Typography>
               </CardContent>
             </CardActionArea>

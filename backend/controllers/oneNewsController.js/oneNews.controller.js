@@ -4,7 +4,7 @@ async function oneNewsController(req, res) {
     const { id } = req.params;
     try {
         const result = await getOneNews(id);
-        const filename = result.photo.name;
+        const filename = result.photo.filename;
         result.info.photo = filename;
         if (result.errors) {
             return res.status(400).json(result.errors[0].message);

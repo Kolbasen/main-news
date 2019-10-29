@@ -8,7 +8,7 @@ async function mainPageController(req, res) {
         result.reverse();
         console.log(result);
         for (let news of result) {
-            news.photo = `static/${news['photo.name']}`
+            news.photo = `static/${news['photo.filename']}`
         }
         res.status(200).json(result)
     } catch (error) {

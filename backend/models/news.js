@@ -8,7 +8,11 @@ const News = sequelize.define('news', {
         primaryKey: true,
         allowNull: false
       },
-      name: {
+      shortHeader: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      header: {
         type: Sequelize.STRING,
         allowNull: false
       },
@@ -29,7 +33,7 @@ const Photo = sequelize.define('photo', {
     primaryKey: true,
     allowNull: false
   },
-  name: {
+  filename: {
     type: Sequelize.STRING,
     allowNull: false
   }

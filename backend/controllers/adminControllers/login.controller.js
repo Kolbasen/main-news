@@ -19,9 +19,8 @@ async function loginController(req, res) {
         console.log(result)
         if (result) {
             const compared = await comparePasswd(password, result.hash)
-            console.log(compared)
             if (compared) {
-                const token = await jwt.sign({ admin: true, id: result.id }, secret)
+                const token = await jwt.sign({ admin: true, id: result.id }, process.env.SECRET)
                 res.status(200).json({token})
             } else {
                 res.status(400).json({error: 'Wrong password'})
