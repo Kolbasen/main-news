@@ -1,4 +1,6 @@
 const { News, Photo } = require('../../models/news');
+const Sequelize = require('sequelize')
+const { Op } = Sequelize;
 
 const insertNews = async (shortHeader, header, tags, text, filename) => {
   try {
@@ -31,6 +33,37 @@ const getNews = async () => {
     return error;
   }
 }
+
+const getTenNews = async currId => {
+  try {
+    if (+currId === -1) {
+      const res = await News.findAll({
+        order: [
+          ['id', 'DESC']
+        ],
+        limit: 10,
+        raw: true,
+        include:[{model: Photo, attributes: ['filename', 'newsId'] }]
+      });
+      return res
+    } else {
+      const res = await News.findAll({
+        where: { id: { [Op.between]: [currId - 10, currId - 1]}},
+        order: [
+          ['id', 'DESC']
+        ],
+        raw: true,
+        include:[{model: Photo, attributes: ['filename', 'newsId'] }]
+      });
+      return res;
+    }
+  } catch (error) {
+    console.log('Getting error: ')
+    console.log(error)
+    return error;
+  }
+}
+
 
 const updateNews = async (id, shortHeader, header, text, tags, filename) => {
   console.log(id, shortHeader, header, text, tags, filename)
@@ -122,7 +155,8 @@ const getNewsFromOneTag = async tag => {
 }
 
 module.exports = {
-  getNews,  
+  getNews,
+  getTenNews,  
   insertNews,
   getOneNews,
   getLastNewsFromTags,
