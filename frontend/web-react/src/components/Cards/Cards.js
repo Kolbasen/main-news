@@ -5,46 +5,50 @@ import useStyles from './style';
 import { getTenCards } from '../../helpers/apiHelpers';
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper';
 
-
-
 function Cards(props) {
   const { cards, setCards, setCurrentNews } = props;
   const history = useHistory();
   const classes = useStyles();
-  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [isLoading, setIsLoading] = useState(true);
+  const [currId, setCurrId] = useState(-1);
+  const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
+  const [newsLeft, setNewsLeft] = useState(true)
 
   function fetchMoreListItems() {
-    const fetchingMoreCards = async () => {
-      const result = await getTenCards();
-      if (result.success) {
+    console.log(currId)
+    const fetchingMoreCards = async (currId) => {
+      const result = await getTenCards(currId);
+      console.log(result.entity)
+      if (!result.entity.length) setNewsLeft(false)
+      if (result.success && result.entity.length) {
+        setIsFetching(false);
         const newCards = cards.concat(result.entity);
         setCards(newCards);
-        setIsFetching(false);
+        setCurrId(result.entity[result.entity.length - 1].id)
       } else {
         console.log('Something went wrong');
       }
     };
-    fetchingMoreCards();
+    fetchingMoreCards(currId);
   }
 
   useEffect(() => {
-    const fetchStartingData = async () => {
-      const result = await getTenCards();
+    const fetchStartingData = async currId => {
+      const result = await getTenCards(currId);
       if (result.success) {
         console.log(result.entity);
+        setCurrId(result.entity[result.entity.length - 1].id)
         setCards(result.entity);
         setIsLoading(false);
       } else {
         console.log('Something went wrong');
       }
     };
-    fetchStartingData();
+    fetchStartingData(currId);
         
   }, []); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
-
   return(
     <div style={{marginTop: '80px'}}>
       {cards.map((value, id) => (
@@ -68,7 +72,7 @@ function Cards(props) {
           </Card>
         </div>
       ))}
-      {isFetching ? 'Fetching more cards' : null}
+      {isFetching && newsLeft ? 'Fetching more cards' : null}
     </div>
   );
 }
