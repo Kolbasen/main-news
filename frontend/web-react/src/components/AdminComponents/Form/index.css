@@ -1,0 +1,26 @@
+.root {
+    /* display: flex;
+    flexDirection: 'column';
+    alignItems: 'center';
+    position: 'absolute';
+    zIndex: '50';
+    backgroundColor: '#51c4c4' */
+    width: 300px;
+    /* max-width: 300; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+    z-index: 50;
+    background-color: aqua;
+    top: 0px;
+    left: 0px;
+}
+
+.form {
+    padding: 10px;
+}
+
+.input {
+    margin-top: 10px    ;
+}
