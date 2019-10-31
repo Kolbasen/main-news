@@ -1,21 +1,25 @@
 import React, { useState, useRef } from 'react'; 
 import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button, TextareaAutosize  } from '@material-ui/core';
-import useStyles from './style';
+// import useStyles from './  style';
+import ImageCrop from '../ImageCrop/ImageCrop'
 import { getToken } from '../../../helpers/tokenHelpers';
-
+import './index.css'
 
 export default function AddForm(props) {
   const { value, submitData, addingNews, setAddingNews } = props;
-  const classes = useStyles(); 
+  // const classes = useStyles(); 
   const [header, setHeader] = useState(value.header);
   const [shortHeader, setShortHeader] = useState(value.shortHeader)
   const [tags, setTags] = useState(value.tags);
   const [text, setText] = useState(value.text);
   const [token, setToken] = useState(getToken());
   const [editingNews, setEditingNews] = useState(false);
-  const photo = useRef(null);
-
-  // console.log(photo.current.files[0])
+  const [img, setImg] = useState(null)
+  
+  const setImageUrl = url => {
+    setImg(url)
+    console.log(img)
+  }
   return (
     <Container component='main'>
       <CssBaseline/>
@@ -25,7 +29,7 @@ export default function AddForm(props) {
         Edit news
       </button>
       <button onClick={() => {
-        submitData(value.id, shortHeader ,header, tags, text, 'delete', photo, token);
+        submitData(value.id, shortHeader ,header, tags, text, 'delete', img, token);
        }
       }>
         Delete news
@@ -36,7 +40,7 @@ export default function AddForm(props) {
         mountOnEnter 
         unmountOnExit
       >
-        <div className={classes.elements}>
+        <div className='root'>
           <Typography>
             Add New Marker 
           </Typography>
@@ -45,18 +49,13 @@ export default function AddForm(props) {
               setAddingNews(false) :
               setEditingNews(false);
           }}>Close</button>
-          <form className={classes.form}>
+          <form className='form'>
             <Grid>
-              <input type='file' ref={photo}/>
-              {/* <Button className={classes.input} onClick={() => {
-                uploadPhoto(photo.current.files[0], token)
-              }}>
-                Save file
-              </Button> */}
+              <ImageCrop setImageUrl={setImageUrl}/>
             </Grid>
             <Grid>
               <TextField
-                className={classes.input}
+                className='input'
                 label='Short Header'
                 onChange={({target}) => setShortHeader(target.value)}
                 value={shortHeader}
@@ -67,7 +66,7 @@ export default function AddForm(props) {
             </Grid>
             <Grid>
               <TextField
-                className={classes.input}
+                className='input'
                 label='Header'
                 onChange={({target}) => setHeader(target.value)}
                 value={header}
@@ -78,7 +77,7 @@ export default function AddForm(props) {
             </Grid>
             <Grid>
               <TextField
-                className={classes.input}
+                className='input'
                 label='Tags'
                 onChange={({target}) => setTags(target.value)}
                 value={tags}
@@ -88,7 +87,7 @@ export default function AddForm(props) {
             </Grid>
             <Grid>
               <TextareaAutosize
-                className={classes.input}
+                className='input'
                 label='Text'
                 onChange={({target}) => setText(target.value)}
                 value={text}
@@ -100,11 +99,11 @@ export default function AddForm(props) {
               {
                 addingNews ? 
                   <Button 
-                    className={classes.input} 
+                    className='input'
                     color='secondary' 
                     variant='contained' 
                     onClick={() => {
-                      submitData(value.id, shortHeader,header, tags, text, 'add', photo.current.files[0], token);
+                      submitData(value.id, shortHeader,header, tags, text, 'add', img, token);
                       setShortHeader('');
                       setHeader('');
                       setTags('')
@@ -115,11 +114,11 @@ export default function AddForm(props) {
                   </Button> 
                   :
                   <Button 
-                    className={classes.input} 
+                    className='input'
                     color='secondary' 
                     variant='contained' 
                     onClick={() => {
-                      submitData(value.id, shortHeader ,header, tags, text, 'edit', photo.current.files[0], token);
+                      submitData(value.id, shortHeader ,header, tags, text, 'edit', img, token);
                       setEditingNews(false);
                     }}>
 								Edit Info

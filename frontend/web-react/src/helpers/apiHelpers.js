@@ -1,9 +1,13 @@
 const API_URL = 'http://localhost:8000';
     
-const getTenCards = async () => {
+const getTenCards = async currID => {
   const url = `${API_URL}`;
-  const result = await fetch(url);
-  console.log(result);   
+  const result = await fetch(url, {
+    method: 'GET',
+    headers: {
+      'CurrentId': `${currID}`
+    }
+  }); 
   return extractResult(result);
 };
 

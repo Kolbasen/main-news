@@ -4,6 +4,7 @@ const { secret } = require('../../config/config')
 
 
 async function adminController(req, res) {
+    console.log('here')
     try {
         const result = await getNews();
         result.reverse();

@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const { secret } = require('../../config/config')
 
 const verifyAccessToken = (req, res, next) => {
     const {
@@ -12,13 +11,12 @@ const verifyAccessToken = (req, res, next) => {
     }
     const base64Url = authorization.split(' ')[1];
   
-    jwt.verify(base64Url, secret , async(err, decoded) => {
+    jwt.verify(base64Url, process.env.SECRET , async(err, decoded) => {
         if (err) {
             return res.status(403).send({
                 message: 'Invalid Signature'
             })
         }
-        console.log(decoded);
         if (decoded.admin) {
             next();
         } else {
