@@ -13,7 +13,7 @@ function Cards(props) {
   const [currId, setCurrId] = useState(-1);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [newsLeft, setNewsLeft] = useState(true)
-
+  console.log(process.env.NODE_ENV)
   function fetchMoreListItems() {
     console.log(currId)
     const fetchingMoreCards = async (currId) => {

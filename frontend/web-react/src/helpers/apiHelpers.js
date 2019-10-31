@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = 'http://localhost:8000/api';
     
 const getTenCards = async currID => {
   const url = `${API_URL}`;

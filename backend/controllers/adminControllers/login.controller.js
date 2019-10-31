@@ -3,7 +3,6 @@
 const jwt = require('jsonwebtoken')
 const { getAdmin, saveAdmin } = require('../../services/admin/admin.service')
 const { encryptePasswd, comparePasswd } = require('../../helpers/encryption')
-const { secret } = require('../../config/config')
 
 async function loginController(req, res) {
     const { username, password } = req.body;

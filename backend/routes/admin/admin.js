@@ -6,6 +6,7 @@ const editNewsController = require('../../controllers/adminControllers/editNews.
 const deleteNewsController = require('../../controllers/adminControllers/deleteNews.controller')
 const loginController = require('../../controllers/adminControllers/login.controller');
 const authMiddleware = require('../../middleware/auth/auth.middleware')
+const addAdminController = require('../../controllers/adminControllers/addAdmin.controller')
 
 const adminRouter = express.Router();
 
@@ -18,6 +19,8 @@ adminRouter.put('/edit',authMiddleware, upload.single('photo'), editNewsControll
 adminRouter.put('/delete',authMiddleware, deleteNewsController);
 
 adminRouter.post('/login', loginController);
+
+adminRouter.put('/register', addAdminController)
 
 
 module.exports = adminRouter;
