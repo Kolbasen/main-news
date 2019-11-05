@@ -5,6 +5,9 @@ import Form from '../Form/Form';
 import { sendCard, getCards, editCard, deleteCard, sendPhoto } from '../../../helpers/apiHelpers';
 import { getToken } from '../../../helpers/tokenHelpers';
 
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
+
+
 export default function Admin() {
   const [isLoading ,setIsLoading] = useState(true);
   const [cards, setCards] = useState(null);
@@ -12,10 +15,10 @@ export default function Admin() {
   const [redirect, setRedirect] = useState(false);
 
   const addNews = async (shortHeader,header, tags, text, photo, token) => {
-    console.log(header, tags, text, photo, token)
+    console.log(header, tags, text, photo, token);
     const formData = new FormData();
     formData.append('shortHeader', shortHeader);
-    formData.append('header', header)
+    formData.append('header', header);
     formData.append('tags', tags);
     formData.append('text', text);
     formData.append('photo', photo);
@@ -53,7 +56,7 @@ export default function Admin() {
   };
 
   const submitData = (id, shortHeader, header, tags, text, type, photo, token) => {
-    console.log(id, header,shortHeader, tags, text, type, photo, token)
+    console.log(id, header,shortHeader, tags, text, type, photo, token);
     if (type === 'add') {
       addNews(shortHeader, header, tags, text, photo, token);
     }
@@ -101,7 +104,7 @@ export default function Admin() {
         cards.map((value) => (
           <div key={value.id}>
             <div style={{display: 'flex', alignItems: 'center '}}>
-              <img src={`http://localhost:8000/${value.photo}`} height='100' width='100'/>
+              <img src={`${API_URL}/${value.photo}`} height='100' width='100'/>
               <p>{value.shortHeader} </p>
               <h2>{value.header} </h2>
               <p>{value.text} </p>

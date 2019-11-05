@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:8000';
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}/api` : 'http://localhost:8000/api';
     
 const getTenCards = async currID => {
   const url = `${API_URL}`;
@@ -12,7 +12,7 @@ const getTenCards = async currID => {
 };
 
 const getCards = async token => {
-  const endpoint = ``;
+  const endpoint = '';
   const url = `${API_URL}/admin/${endpoint}`;
   const result = await fetch(url, {
     method: 'GET',
@@ -27,7 +27,7 @@ const getCards = async token => {
 const sendCard = async (formData, token) => {
   const endpoint = 'admin/add';
   const url = `${API_URL}/${endpoint}`;
-  console.log(formData)
+  console.log(formData);
   const result = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -39,7 +39,7 @@ const sendCard = async (formData, token) => {
 };
 
 const editCard = async (formData, token) => {
-  console.log(token)
+  console.log(token);
   const endpoint = 'admin/edit';
   const url = `${API_URL}/${endpoint}`;
   const result = await fetch(url, {
@@ -105,10 +105,10 @@ const sendPhoto = async formData => {
   const endpoint = 'photo/upload';
   const url = `${API_URL}/${endpoint}`;
   const result = await fetch(url, {
-      method: 'PUT',
-      body: formData
+    method: 'PUT',
+    body: formData
   });
-  return extractResult(result)
+  return extractResult(result);
 };
 
 const getPhoto = async () => {

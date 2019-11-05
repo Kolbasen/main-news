@@ -1,25 +1,25 @@
 import React, { useState, useRef } from 'react'; 
 import { Container, Typography, TextField, Slide, Grid, CssBaseline, Button, TextareaAutosize  } from '@material-ui/core';
 // import useStyles from './  style';
-import ImageCrop from '../ImageCrop/ImageCrop'
+import ImageCrop from '../ImageCrop/ImageCrop';
 import { getToken } from '../../../helpers/tokenHelpers';
-import './index.css'
+import './index.css';
 
 export default function AddForm(props) {
   const { value, submitData, addingNews, setAddingNews } = props;
   // const classes = useStyles(); 
   const [header, setHeader] = useState(value.header);
-  const [shortHeader, setShortHeader] = useState(value.shortHeader)
+  const [shortHeader, setShortHeader] = useState(value.shortHeader);
   const [tags, setTags] = useState(value.tags);
   const [text, setText] = useState(value.text);
   const [token, setToken] = useState(getToken());
   const [editingNews, setEditingNews] = useState(false);
-  const [img, setImg] = useState(null)
+  const [img, setImg] = useState(null);
   
   const setImageUrl = url => {
-    setImg(url)
-    console.log(img)
-  }
+    setImg(url);
+    console.log(img);
+  };
   return (
     <Container component='main'>
       <CssBaseline/>
@@ -30,7 +30,7 @@ export default function AddForm(props) {
       </button>
       <button onClick={() => {
         submitData(value.id, shortHeader ,header, tags, text, 'delete', img, token);
-       }
+      }
       }>
         Delete news
       </button>
@@ -106,8 +106,8 @@ export default function AddForm(props) {
                       submitData(value.id, shortHeader,header, tags, text, 'add', img, token);
                       setShortHeader('');
                       setHeader('');
-                      setTags('')
-                      setText('')
+                      setTags('');
+                      setText('');
                       setAddingNews(false);
                     }}>
 								Save Info

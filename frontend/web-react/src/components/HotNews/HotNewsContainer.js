@@ -5,25 +5,25 @@ import { connect } from 'react-redux';
 import { setCurrentNews } from '../../store/currentNews/actions';
 
 function HotNewsContainer(props) {
-    const { hotNews, setCurrentNews } = props;
-    const location = useLocation();
-    return (
-        <HotNews 
-            key={location.key}
-            hotNews={hotNews}
-            setCurrentNews={setCurrentNews}
-        />
-    )
+  const { hotNews, setCurrentNews } = props;
+  const location = useLocation();
+  return (
+    <HotNews 
+      key={location.key}
+      hotNews={hotNews}
+      setCurrentNews={setCurrentNews}
+    />
+  );
 }
 
 const mapStateToProps = state => ({
-    cards: state.cards.cards,
-    id: state.id.id,
-    hotNews: state.hotNews.hotNews
-  });
+  cards: state.cards.cards,
+  id: state.id.id,
+  hotNews: state.hotNews.hotNews
+});
   
-  const mapActionsToProps = {
-    setCurrentNews,
-  };
+const mapActionsToProps = {
+  setCurrentNews,
+};
 
-  export default connect(mapStateToProps, mapActionsToProps)(HotNewsContainer)
+export default connect(mapStateToProps, mapActionsToProps)(HotNewsContainer);

@@ -2,6 +2,7 @@
 
 require('dotenv').config()
 const express = require('express');
+const path = require('path');
 const app = express();
 const hotNewsRouter = require('./routes/hotNews/hotNews');
 const oneNewsRouter = require('./routes/oneNews/oneNews');
@@ -38,14 +39,26 @@ app.use((req, res, next) => {
     next();
   });
 
-app.use('/', mainPageRouter);
+  console.log(process.env.NODE_ENV)
+console.log(1)
+app.use(express.static(__dirname));
+  app.use(express.static(path.join(__dirname, 'build')));
+  console.log(2)
+app.use('/api', mainPageRouter);
 
-app.use('/news', oneNewsRouter);
+app.use('/api/news', oneNewsRouter);
 
-app.use('/hotnews', hotNewsRouter);
+app.use('/api/hotnews', hotNewsRouter);
 
-app.use('/tags', tagNewsRouter);
+app.use('/api/tags', tagNewsRouter);
 
-app.use('/admin' ,amdminRouter);  
+app.use('/api/admin' ,amdminRouter);  
 
-app.listen(8000);
+if (process.env.NODE_ENV == 'production') {
+  
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  })
+}
+
+app.listen(process.env.PORT || 8000);

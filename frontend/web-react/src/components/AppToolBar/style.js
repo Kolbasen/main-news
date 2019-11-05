@@ -3,25 +3,59 @@ import { flexbox } from '@material-ui/system';
 
 export default makeStyles((theme) => ({
   root: {
-    display: 'flex',
-    flex: 1
   },
   toolbar: {
-    display: 'flex',
-    backgroundColor: '#000000'
+    backgroundColor: '#000000',
+    alignItems: 'center',
+    justifyContent: 'center',
+    maxHeight: '56px',
+    [theme.breakpoints.down ('xs')]: {
+      justifyContent: 'space-between'
+    },
   },
   items: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    [theme.breakpoints.down ('xs')]: {
+      display: 'none',
+    },
+  },
+  mobileItem: {
+    display: 'flex',
+    [theme.breakpoints.up ('sm')]: {
+      display: 'none',
+    },
   },
   menuButton: {
     marginRight: theme.spacing(2),
   },
-  title: {
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
+  bottomLine: {
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    [theme.breakpoints.down ('lg')]: {
+      width: '50%'
     },
-  },
+    [theme.breakpoints.down ('md')]: {
+      width: '65%'
+    },
+    [theme.breakpoints.down (900)]: {
+      width: '80%'
+    },
+    [theme.breakpoints.down (800)]: {
+      width: '80%'
+    },
+    [theme.breakpoints.down (750)]: {
+      width: '90%'
+    },
+    [theme.breakpoints.down ('xs')]: {
+      width: '75%'
+    },
+    [theme.breakpoints.down (550)]: {
+      width: '80%'
+    },
+    [theme.breakpoints.down (450)]: {
+      width: '90%'
+    },
+    borderBottom: '2px solid black',
+    marginTop: '85px',
+  }
 }));

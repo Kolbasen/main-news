@@ -2,7 +2,6 @@ import React from 'react';
 import Cards from './Cards';
 import { connect } from 'react-redux';
 import { setCurrentNews} from '../../store/currentNews/actions';
-import { setHotNews } from '../../store/hotNews/actions';
 import { setCards } from '../../store/cards/actions';
 
 function CardsContainer(props) {

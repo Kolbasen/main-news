@@ -18,7 +18,7 @@ class ImageCrop extends PureComponent {
         
       const reader = new FileReader();
       reader.addEventListener('load', () =>{
-        this.setState({ src: reader.result })}
+        this.setState({ src: reader.result });}
       );
       reader.readAsDataURL(e.target.files[0]);
     }
@@ -75,11 +75,11 @@ class ImageCrop extends PureComponent {
           console.error('Canvas is empty');
           return;
         }
-        console.log(blob)
+        console.log(blob);
         blob.name = fileName;
         window.URL.revokeObjectURL(this.fileUrl);
         this.fileUrl = window.URL.createObjectURL(blob);
-        this.props.setImageUrl(blob)
+        this.props.setImageUrl(blob);
         resolve(this.fileUrl);
       }, 'image/jpeg');
     });
@@ -87,7 +87,7 @@ class ImageCrop extends PureComponent {
 
   render() {
     const { crop, croppedImageUrl, src } = this.state;
-    console.log(croppedImageUrl)
+    console.log(croppedImageUrl);
     return (
       <div>
         <div>
@@ -111,4 +111,4 @@ class ImageCrop extends PureComponent {
   }
 }
 
-export default ImageCrop
+export default ImageCrop;

@@ -5,7 +5,7 @@ async function oneNewsController(req, res) {
     try {
         const result = await getOneNews(id);
         const filename = result.photo.filename;
-        result.info.photo = filename;
+        result.info.photo = `static/${filename}`;
         if (result.errors) {
             return res.status(400).json(result.errors[0].message);
         } else {

@@ -5,6 +5,8 @@ import useStyles from './style';
 import { getTenCards } from '../../helpers/apiHelpers';
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper';
 
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
+
 function Cards(props) {
   const { cards, setCards, setCurrentNews } = props;
   const history = useHistory();
@@ -12,19 +14,17 @@ function Cards(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [currId, setCurrId] = useState(-1);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
-  const [newsLeft, setNewsLeft] = useState(true)
+  const [newsLeft, setNewsLeft] = useState(true);
 
   function fetchMoreListItems() {
-    console.log(currId)
     const fetchingMoreCards = async (currId) => {
       const result = await getTenCards(currId);
-      console.log(result.entity)
-      if (!result.entity.length) setNewsLeft(false)
+      if (!result.entity.length) setNewsLeft(false);
       if (result.success && result.entity.length) {
         setIsFetching(false);
         const newCards = cards.concat(result.entity);
         setCards(newCards);
-        setCurrId(result.entity[result.entity.length - 1].id)
+        setCurrId(result.entity[result.entity.length - 1].id);
       } else {
         console.log('Something went wrong');
       }
@@ -36,8 +36,7 @@ function Cards(props) {
     const fetchStartingData = async currId => {
       const result = await getTenCards(currId);
       if (result.success) {
-        console.log(result.entity);
-        setCurrId(result.entity[result.entity.length - 1].id)
+        setCurrId(result.entity[result.entity.length - 1].id);
         setCards(result.entity);
         setIsLoading(false);
       } else {
@@ -45,10 +44,10 @@ function Cards(props) {
       }
     };
     fetchStartingData(currId);
-        
-  }, []); 
+  }, [currId, setCards]); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
+  
   return(
     <div style={{marginTop: '80px'}}>
       {cards.map((value, id) => (
@@ -60,7 +59,7 @@ function Cards(props) {
             }}>
               <CardMedia
                 className={classes.media}
-                image={`http://localhost:8000/${value.photo}`}
+                image={`${API_URL}/${value.photo}`}
                 title="Contemplative Reptile"
               />
               <CardContent>
