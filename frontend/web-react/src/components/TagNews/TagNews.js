@@ -22,7 +22,7 @@ export default function TagNews(props) {
       }
     };
     fetchTagNews(params.tag);
-  }, [cards, params.tag, setCards]);
+  }, []);
 
   if (isLoading) return <h1 style={{marginTop: '70px'}}>Is Loading...</h1>;
   

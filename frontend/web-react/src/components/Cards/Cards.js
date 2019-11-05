@@ -36,6 +36,7 @@ function Cards(props) {
     const fetchStartingData = async currId => {
       const result = await getTenCards(currId);
       if (result.success) {
+        console.log(result.entity)
         setCurrId(result.entity[result.entity.length - 1].id);
         setCards(result.entity);
         setIsLoading(false);
@@ -44,7 +45,7 @@ function Cards(props) {
       }
     };
     fetchStartingData(currId);
-  }, [currId, setCards]); 
+  }, []); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
   

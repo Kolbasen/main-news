@@ -37,7 +37,7 @@ function CurrentNews(props) {
       }
     }; 
     fetchOneNews(id);
-  }, [id, setHotNews]);
+  }, []);
 
   if (isLoading) return <div>Is Loading...</div>;
 
