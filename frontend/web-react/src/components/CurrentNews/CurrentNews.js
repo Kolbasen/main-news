@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card, CardMedia, CardContent, Typography} from '@material-ui/core';
-import HotNewsContainer from '../HotNews/HotNewsContainer'
+import HotNewsContainer from '../HotNews/HotNewsContainer';
 import useStyles from './style';
 import { getOneNews, getHotNews } from '../../helpers/apiHelpers';
 import { connect } from 'react-redux';
@@ -9,7 +9,7 @@ import {setCards} from '../../store/cards/actions';
 import { setHotNews } from '../../store/hotNews/actions';
 import { setCurrentNews } from '../../store/currentNews/actions';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
 function CurrentNews(props) {
   const classes = useStyles();
@@ -37,10 +37,10 @@ function CurrentNews(props) {
       }
     }; 
     fetchOneNews(id);
-  }, []);
+  }, [id, setHotNews]);
 
   if (isLoading) return <div>Is Loading...</div>;
-  console.log(card)
+
   return (
     <div className={classes.container}>
       <div className={classes.items}>
@@ -66,7 +66,7 @@ function CurrentNews(props) {
           </CardContent>
         </Card>
       </div>
-      <div style={{marginLeft: '30px'}}>
+      <div className={classes.hotNews}>
         <HotNewsContainer/>
       </div>
     </div>
@@ -74,7 +74,6 @@ function CurrentNews(props) {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     cards: state.cards.cards,
     id: state.id.id,

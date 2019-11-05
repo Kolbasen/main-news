@@ -4,12 +4,12 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   port: process.env.DB_PORT,
   dialect: "postgres",
   protocol: "postgres",
-  ssl: true,
-  logging:  true, //false
+  ssl: false,
+  logging:  false, //false
 
-  dialectOptions: {
-    ssl: true
-},
+//   dialectOptions: {
+//     ssl: true
+// },
 
 pool: {
     max: 20,
