@@ -4,7 +4,7 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, Button} from 
 import { getTagNews } from '../../helpers/apiHelpers';
 import useStyles from './style';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : `http://localhost:8000`;
 
 export default function TagNews(props) {
   const { cards, setCards, setCurrentNews } = props;

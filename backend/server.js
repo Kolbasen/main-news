@@ -39,10 +39,11 @@ app.use((req, res, next) => {
     next();
   });
 
-  console.log('production')
-  app.use(express.static(__dirname));
+  console.log(process.env.NODE_ENV)
+console.log(1)
+app.use(express.static(__dirname));
   app.use(express.static(path.join(__dirname, 'build')));
-
+  console.log(2)
 app.use('/api', mainPageRouter);
 
 app.use('/api/news', oneNewsRouter);
@@ -53,8 +54,11 @@ app.use('/api/tags', tagNewsRouter);
 
 app.use('/api/admin' ,amdminRouter);  
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'))
-})
+if (process.env.NODE_ENV == 'production') {
+  
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'))
+  })
+}
 
 app.listen(process.env.PORT || 8000);

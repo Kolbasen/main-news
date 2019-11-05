@@ -11,6 +11,7 @@ import CurrentNewsContainer from '../CurrentNews/CurrentNewsContainer';
 import TagNewsContainer from '../TagNews/TagNewsContainer';
 import AdminLogin from '../AdminComponents/AdminLogin/AdminLogin';
 import Admin from '../AdminComponents/Admin/Admin';
+import SideDrawe from '../SideDrawer/SideDrawer'
 
 function App() {
 

@@ -9,7 +9,7 @@ import {setCards} from '../../store/cards/actions';
 import { setHotNews } from '../../store/hotNews/actions';
 import { setCurrentNews } from '../../store/currentNews/actions';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : `http://localhost:8000`;
 
 function CurrentNews(props) {
   const classes = useStyles();
@@ -66,7 +66,7 @@ function CurrentNews(props) {
           </CardContent>
         </Card>
       </div>
-      <div style={{marginLeft: '30px'}}>
+      <div className={classes.hotNews}>
         <HotNewsContainer/>
       </div>
     </div>

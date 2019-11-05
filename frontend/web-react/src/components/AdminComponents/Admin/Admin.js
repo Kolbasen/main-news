@@ -5,7 +5,8 @@ import Form from '../Form/Form';
 import { sendCard, getCards, editCard, deleteCard, sendPhoto } from '../../../helpers/apiHelpers';
 import { getToken } from '../../../helpers/tokenHelpers';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : `http://localhost:8000`;
+
 
 export default function Admin() {
   const [isLoading ,setIsLoading] = useState(true);

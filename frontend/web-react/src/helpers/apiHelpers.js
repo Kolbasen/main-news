@@ -1,4 +1,4 @@
-const API_URL = `${process.env.REACT_APP_API_URL}/api`;
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}/api` : `http://localhost:8000/api`;
     
 const getTenCards = async currID => {
   const url = `${API_URL}`;

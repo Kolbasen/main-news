@@ -5,7 +5,7 @@ import useStyles from './style';
 import { getTenCards } from '../../helpers/apiHelpers';
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : `http://localhost:8000`;
 
 function Cards(props) {
   const { cards, setCards, setCurrentNews } = props;
@@ -50,6 +50,7 @@ function Cards(props) {
   }, []); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
+  console.log(process.env.NODE_ENV)
   return(
     <div style={{marginTop: '80px'}}>
       {cards.map((value, id) => (
