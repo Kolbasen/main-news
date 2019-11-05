@@ -19,7 +19,7 @@ const useInfiniteScroll = callback => {
 
   useEffect(() => {
     if (!isFetching) return;
-    console.log('Perform fetch')
+    console.log('Perform fetch');
     callback();
   }, [callback, isFetching]);
 
@@ -29,7 +29,7 @@ const useInfiniteScroll = callback => {
       document.documentElement.scrollTop,
       document.body.scrollTop
     ) < document.documentElement.offsetHeight - 10 || isFetching) return;
-    console.log('Height is critical')
+    console.log('Height is critical');
     setIsFetching(true);
   }
 
