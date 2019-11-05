@@ -4,6 +4,8 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, Button} from 
 import { getTagNews } from '../../helpers/apiHelpers';
 import useStyles from './style';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function TagNews(props) {
   const { cards, setCards, setCurrentNews } = props;
   const params = useParams();
@@ -38,7 +40,7 @@ export default function TagNews(props) {
               }}>
                 <CardMedia
                   className={classes.media}
-                  image={`http://localhost:8000/static/${value.photo}`}
+                  image={`${API_URL}/${value.photo}`}
                   title="Contemplative Reptile"
                 />
                 <CardContent>

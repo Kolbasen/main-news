@@ -9,6 +9,8 @@ import {setCards} from '../../store/cards/actions';
 import { setHotNews } from '../../store/hotNews/actions';
 import { setCurrentNews } from '../../store/currentNews/actions';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function CurrentNews(props) {
   const classes = useStyles();
   const params = useParams();
@@ -45,7 +47,7 @@ function CurrentNews(props) {
         <Card className={classes.card}>
           <CardMedia
             className={classes.media}
-            image={`http://localhost:8000/static/${card.photo}`}
+            image={`${API_URL}/${card.photo}`}
             title="Contemplative Reptile"
           />
         </Card>

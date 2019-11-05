@@ -5,6 +5,8 @@ import Form from '../Form/Form';
 import { sendCard, getCards, editCard, deleteCard, sendPhoto } from '../../../helpers/apiHelpers';
 import { getToken } from '../../../helpers/tokenHelpers';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 export default function Admin() {
   const [isLoading ,setIsLoading] = useState(true);
   const [cards, setCards] = useState(null);
@@ -101,7 +103,7 @@ export default function Admin() {
         cards.map((value) => (
           <div key={value.id}>
             <div style={{display: 'flex', alignItems: 'center '}}>
-              <img src={`http://localhost:8000/${value.photo}`} height='100' width='100'/>
+              <img src={`${API_URL}/${value.photo}`} height='100' width='100'/>
               <p>{value.shortHeader} </p>
               <h2>{value.header} </h2>
               <p>{value.text} </p>

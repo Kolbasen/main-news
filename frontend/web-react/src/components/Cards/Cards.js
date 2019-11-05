@@ -5,6 +5,8 @@ import useStyles from './style';
 import { getTenCards } from '../../helpers/apiHelpers';
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper';
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 function Cards(props) {
   const { cards, setCards, setCurrentNews } = props;
   const history = useHistory();
@@ -13,7 +15,7 @@ function Cards(props) {
   const [currId, setCurrId] = useState(-1);
   const [isFetching, setIsFetching] = useInfiniteScroll(fetchMoreListItems);
   const [newsLeft, setNewsLeft] = useState(true)
-
+  console.log(process.env.NODE_ENV)
   function fetchMoreListItems() {
     console.log(currId)
     const fetchingMoreCards = async (currId) => {
@@ -45,7 +47,6 @@ function Cards(props) {
       }
     };
     fetchStartingData(currId);
-        
   }, []); 
 
   if (isLoading) return <h1>Is Loading...</h1>;
@@ -60,7 +61,7 @@ function Cards(props) {
             }}>
               <CardMedia
                 className={classes.media}
-                image={`http://localhost:8000/${value.photo}`}
+                image={`${API_URL}/${value.photo}`}
                 title="Contemplative Reptile"
               />
               <CardContent>
