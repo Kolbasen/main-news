@@ -43,7 +43,7 @@ class ImageCrop extends PureComponent {
       const croppedImageUrl = await this.getCroppedImg(
         this.imageRef,
         crop,
-        'newFile.jpeg'
+        'newFile.png'
       );
       this.setState({ croppedImageUrl });
     }
@@ -53,8 +53,24 @@ class ImageCrop extends PureComponent {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
-    canvas.width = crop.width;
-    canvas.height = crop.height;
+    const originWidth = crop.width * scaleX;
+    const originHeight = crop.height * scaleY;
+    let maxWidth = 1200, maxHeight = 1200 / (16 / 9);
+    let targetWidth = originWidth,
+      targetHeight = originHeight;
+    if (originWidth > maxWidth || originHeight > maxHeight) {
+      if (originWidth / originHeight > maxWidth / maxHeight) {
+        targetWidth = maxWidth;
+        targetHeight = Math.round(maxWidth * (originHeight / originWidth));
+      } else {
+        targetHeight = maxHeight;
+        targetWidth = Math.round(maxHeight * (originWidth / originHeight));
+      }
+    }
+    // set canvas size
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+
     const ctx = canvas.getContext('2d');
 
     ctx.drawImage(
@@ -65,8 +81,8 @@ class ImageCrop extends PureComponent {
       crop.height * scaleY,
       0,
       0,
-      crop.width,
-      crop.height
+      targetWidth,
+      targetHeight
     );
 
     return new Promise((resolve, reject) => {
@@ -75,19 +91,17 @@ class ImageCrop extends PureComponent {
           console.error('Canvas is empty');
           return;
         }
-        console.log(blob);
         blob.name = fileName;
         window.URL.revokeObjectURL(this.fileUrl);
         this.fileUrl = window.URL.createObjectURL(blob);
         this.props.setImageUrl(blob);
         resolve(this.fileUrl);
-      }, 'image/jpeg');
+      }, 'image/png', 1);
     });
   }
 
   render() {
     const { crop, croppedImageUrl, src } = this.state;
-    console.log(croppedImageUrl);
     return (
       <div>
         <div>

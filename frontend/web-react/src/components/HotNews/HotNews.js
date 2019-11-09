@@ -24,7 +24,6 @@ function HotNews(props) {
             <Card className={classes.card}>
               <CardActionArea onClick={() => {
                 console.log(history.id);
-                setCurrentNews(value.id);
                 history.push(`/news/${value.id}`); 
               }}>
                 <CardContent>

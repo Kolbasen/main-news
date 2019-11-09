@@ -6,12 +6,20 @@ export default makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: '25px',
   },
   card: {
-    width: 300,
-    marginBottom: theme.spacing(2)
+    width: 380,
+    maxWidth: 380,
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down (600)]: {
+      width: 300
+    },
   },
   media: {
-    height: 140,
+    height: 223,
+    [theme.breakpoints.down (600)]: {
+      height: 176
+    },
   },
 }));

@@ -6,11 +6,12 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import CardsContainer from '../Cards/CardsContainer';
-import AppToolBar from '../AppToolBar/AppToolBar';
+import AppToolBarContainer from '../AppToolBar/AppToolBarContainer';
 import CurrentNewsContainer from '../CurrentNews/CurrentNewsContainer';
 import TagNewsContainer from '../TagNews/TagNewsContainer';
 import AdminLogin from '../AdminComponents/AdminLogin/AdminLogin';
 import Admin from '../AdminComponents/Admin/Admin';
+import Contacts from '../Contacts/Contacts'
 
 function App() {
 
@@ -21,7 +22,8 @@ function App() {
           <Route exact path='/admin' component={Admin}/>
           <Route exact path='/adminlogin' component={AdminLogin}/>
           <Fragment>
-            <AppToolBar/>
+            <AppToolBarContainer/>
+            <Contacts/>
             <Route exact path='/' component={CardsContainer}/>
             <Route exact path='/news/:id' children={<CurrentNewsContainer/>}/>
             <Route exact path='/news/tag/:tag' children={<TagNewsContainer/>}/>

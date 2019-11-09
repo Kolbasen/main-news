@@ -4,10 +4,7 @@ import { Card, CardMedia, CardContent, Typography} from '@material-ui/core';
 import HotNewsContainer from '../HotNews/HotNewsContainer';
 import useStyles from './style';
 import { getOneNews, getHotNews } from '../../helpers/apiHelpers';
-import { connect } from 'react-redux';
-import {setCards} from '../../store/cards/actions';
-import { setHotNews } from '../../store/hotNews/actions';
-import { setCurrentNews } from '../../store/currentNews/actions';
+
 
 const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
@@ -15,8 +12,9 @@ function CurrentNews(props) {
   const classes = useStyles();
   const params = useParams();
   const { id } = params;
-  const { setHotNews } = props;
-  const [card, setCard] = useState({});
+  const { setHotNews, currentNews, setCurrentNews, oneCard, setOneCard } = props;
+  console.log(setOneCard)
+  console.log(oneCard)
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -26,7 +24,7 @@ function CurrentNews(props) {
         const [oneNews, hotNews] = await Promise.all([getOneNews(id), getHotNews()]);
         if (oneNews.success && hotNews.success) {
           setHotNews(hotNews.entity);
-          setCard(oneNews.entity);
+          setOneCard(oneNews.entity)
           setIsLoading(false);
         } else {
           console.log('Something went wrong');
@@ -40,28 +38,28 @@ function CurrentNews(props) {
   }, []);
 
   if (isLoading) return <div>Is Loading...</div>;
-
+  console.log(oneCard)
   return (
     <div className={classes.container}>
       <div className={classes.items}>
         <Card className={classes.card}>
           <CardMedia
             className={classes.media}
-            image={`${API_URL}/${card.photo}`}
+            image={`${API_URL}/${oneCard.photo}`}
             title="Contemplative Reptile"
           />
         </Card>
         <Card className={classes.card}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {card.header}
+            <Typography gutterBottom variant="h5" component="h2" style={{whiteSpace: 'pre-line'}}>
+              {oneCard.header}
             </Typography>
           </CardContent>
         </Card>
         <Card className={classes.card}>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {card.text}
+            <Typography variant="body2" color="textSecondary" component="p" style={{whiteSpace: 'pre-line'}}>
+              {oneCard.text}
             </Typography>
           </CardContent>
         </Card>
@@ -73,17 +71,4 @@ function CurrentNews(props) {
   );
 }
 
-const mapStateToProps = state => {
-  return {
-    cards: state.cards.cards,
-    id: state.id.id,
-    hotNews: state.hotNews.hotNews};
-};
-
-const mapActionsToProps = {
-  setCurrentNews,
-  setCards,
-  setHotNews
-};
-
-export default connect(mapStateToProps, mapActionsToProps)(CurrentNews);
+export default CurrentNews;

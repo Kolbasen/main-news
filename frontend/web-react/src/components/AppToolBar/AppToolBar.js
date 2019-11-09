@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, ListItem, ListItemText, IconButton } from '@material-ui/core';
 import SideDrawer from '../SideDrawer/SideDrawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyle from './style';
-import logo from '../../logo.jpg';
+import logo from '../../logo.png';
 
-export default function AppToolBar() {
+export default function AppToolBar(props) {
+  const { oneCard } = props;
   const classes = useStyle();
   const history = useHistory();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+  const [date, setDate] = useState(null)
 
   const toggleDrawer = open => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -17,6 +19,18 @@ export default function AppToolBar() {
     }
     setSideDrawerOpen(open);
   };
+
+  useEffect(() => {
+    if (oneCard) {
+      if (history.location.pathname.match(/news\/([0-9])+/)) {
+        const fullDate = new Date(oneCard.createdAt);
+        const date = fullDate.toLocaleDateString().split('/').join('.')
+        setDate(date)
+      } else {
+        setDate(null)
+      }
+    }
+  }, [history.location, oneCard])
   
   return (
     <div className={classes.root}>
@@ -25,7 +39,7 @@ export default function AppToolBar() {
           <div className={classes.items}>
             <ListItem button component='button'  onClick={() => history.push('/')}>
 				      <IconButton>
-                <img src={logo} width='25' height='25'></img>
+                {/* <img src={logo} height='50' width='50'></img> */}
               </IconButton>
             </ListItem>
             <ListItem button component='button'  onClick={() => history.push('/news/tag/world')}>
@@ -59,7 +73,14 @@ export default function AppToolBar() {
         </Toolbar>
       </AppBar>
       <SideDrawer toggleDrawer={toggleDrawer} sideDrawerOpen={sideDrawerOpen}/>
-      <div className={classes.bottomLine}/>
+      <div className={classes.bottomLine}>
+        <div>
+          {date}
+        </div>
+        <div>
+
+        </div>
+      </div>
     </div>
   );
 }

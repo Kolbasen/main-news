@@ -16,11 +16,18 @@ export default makeStyles((theme) => ({
     },
   },
   card: {
-    width: 300,
-    marginBottom: theme.spacing(2)
+    width: 380,
+    maxWidth: 380,
+    marginBottom: theme.spacing(2),
+    [theme.breakpoints.down (600)]: {
+      width: 300
+    },
   },
   media: {
-    height: 140,
+    height: 223,
+    [theme.breakpoints.down (600)]: {
+      height: 176
+    },
   },
   hotNews: {
     marginLeft: '30px',

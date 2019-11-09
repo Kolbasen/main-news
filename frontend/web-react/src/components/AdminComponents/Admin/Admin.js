@@ -15,7 +15,6 @@ export default function Admin() {
   const [redirect, setRedirect] = useState(false);
 
   const addNews = async (shortHeader,header, tags, text, photo, token) => {
-    console.log(header, tags, text, photo, token);
     const formData = new FormData();
     formData.append('shortHeader', shortHeader);
     formData.append('header', header);
@@ -24,7 +23,7 @@ export default function Admin() {
     formData.append('photo', photo);
     try {
       const result = await sendCard(formData, token);
-      console.log(result);
+      console.log(result)
     } catch (error) {
       console.log('API call error:', error);
     }
@@ -40,7 +39,6 @@ export default function Admin() {
     formData.append('photo', photo);
     try {
       const result = await editCard(formData, token);
-      console.log(result);
     } catch (error) {
       console.log('API call error:', error);
     }
@@ -49,14 +47,12 @@ export default function Admin() {
   const deleteNews = async (id, token) => {
     try {
       const result = await deleteCard(id, token);
-      console.log(result);
     } catch (error) {
       console.log('API call error:', error);
     }
   };
 
   const submitData = (id, shortHeader, header, tags, text, type, photo, token) => {
-    console.log(id, header,shortHeader, tags, text, type, photo, token);
     if (type === 'add') {
       addNews(shortHeader, header, tags, text, photo, token);
     }
@@ -77,7 +73,6 @@ export default function Admin() {
     const fetchStartingData = async () => {
       const result = await getCards(getToken());
       if (result.success) {
-        console.log(result.entity);
         setCards(result.entity);
         setIsLoading(false);
       } else {
