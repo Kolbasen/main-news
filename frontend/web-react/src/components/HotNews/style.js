@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
     marginTop: '70px'
   },
   card: {
-    width: 150,
+    maxWidth: 250,
     height: 50,
     marginBottom: theme.spacing(2)
   },

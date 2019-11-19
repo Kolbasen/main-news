@@ -1,7 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';		
+import ListItemText from '@material-ui/core/ListItemText';	
+import Link from '@material-ui/core/Link'	
 import useStyles from './style';
 
 
@@ -34,6 +35,11 @@ const SideList = (props) => {
       </ListItem>
       <ListItem button component='a' onClick={() => history.push('/news/tag/technology')}>
         <ListItemText primary='Технологии'/>
+      </ListItem>
+      <ListItem button component='a'>
+      <Link href='https://t.me/realmainnews'  target="_blank">>
+                Телеграм канал
+            </Link> 
       </ListItem>
     </div>
   );

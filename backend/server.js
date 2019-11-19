@@ -54,11 +54,11 @@ app.use('/api/tags', tagNewsRouter);
 
 app.use('/api/admin' ,amdminRouter);  
 
-if (process.env.NODE_ENV == 'production') {
-  
+// if (+process.env.NODE_ENV == 'production') {
+  // console.log('here is prod')
   app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'))
   })
-}
+// }
 
 app.listen(process.env.PORT || 8000);

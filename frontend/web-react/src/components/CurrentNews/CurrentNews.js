@@ -58,7 +58,7 @@ function CurrentNews(props) {
         </Card>
         <Card className={classes.card}>
           <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p" style={{whiteSpace: 'pre-line'}}>
+            <Typography variant="body1" color="textSecondary" component="p" style={{whiteSpace: 'pre-line'}}>
               {oneCard.text}
             </Typography>
           </CardContent>

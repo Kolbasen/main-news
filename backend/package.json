@@ -2,7 +2,7 @@
     "name": "server",
     "version": "0.0.1",
     "scripts": {
-        "start": "set NODE_ENV=production &node ./server.js",
+        "start": "node ./server.js",
         "dev": "set NODE_ENV=development & nodemon ./server.js"
     },
     "dependencies": {

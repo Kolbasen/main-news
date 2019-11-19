@@ -6,8 +6,8 @@ export default function Contacts() {
     const classes = useStyles()
     return (
         <div className={classes.content}>
-            <Link href='https://www.google.com.ua/?hl=ru'  target="_blank">>
-                Link
+            <Link href='https://t.me/realmainnews'  target="_blank">>
+                Телеграм канал
             </Link>
         </div>
     )

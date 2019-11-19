@@ -4,7 +4,7 @@ import { AppBar, Toolbar, ListItem, ListItemText, IconButton } from '@material-u
 import SideDrawer from '../SideDrawer/SideDrawer';
 import MenuIcon from '@material-ui/icons/Menu';
 import useStyle from './style';
-import logo from '../../logo.png';
+import logo from '../../logo2.png';
 
 export default function AppToolBar(props) {
   const { oneCard } = props;
@@ -39,7 +39,7 @@ export default function AppToolBar(props) {
           <div className={classes.items}>
             <ListItem button component='button'  onClick={() => history.push('/')}>
 				      <IconButton>
-                {/* <img src={logo} height='50' width='50'></img> */}
+                <img src={logo} width='42' height='25'></img>
               </IconButton>
             </ListItem>
             <ListItem button component='button'  onClick={() => history.push('/news/tag/world')}>
@@ -66,7 +66,7 @@ export default function AppToolBar(props) {
           <div className={classes.mobileItem}>
             <ListItem button component='button'  onClick={() => history.push('/')}>
 				      <IconButton>
-                <img src={logo} width='25' height='25'></img>
+                <img src={logo} width='42' height='25'></img>
               </IconButton>
             </ListItem>
           </div>

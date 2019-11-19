@@ -8,5 +8,11 @@ export default makeStyles((theme) => ({
       [theme.breakpoints.down (600)]: {
         display: 'none'
       },
+      [theme.breakpoints.down (700)]: {
+        display: 'none'
+      },
+      [theme.breakpoints.down (1000)]: {
+        right: 20
+      },
   },
 }));
