@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import AppToolBar from './AppToolBar';
-import { setOneCard } from '../../store/oneCard/actions'
 
 function AppToolBarContainer(props) {
   const { cards, oneCard } = props;

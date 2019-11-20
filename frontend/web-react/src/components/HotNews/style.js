@@ -8,9 +8,10 @@ export default makeStyles((theme) => ({
     marginTop: '70px'
   },
   card: {
-    maxWidth: 250,
-    height: 50,
-    marginBottom: theme.spacing(2)
+    display: 'block',
+    width: 280,
+    height: 103,
+    marginBottom: theme.spacing(2),
   },
   media: {
     height: 140,

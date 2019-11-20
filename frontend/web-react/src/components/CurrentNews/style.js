@@ -31,7 +31,7 @@ export default makeStyles((theme) => ({
   },
   hotNews: {
     marginLeft: '30px',
-    [theme.breakpoints.down (700)]: {
+    [theme.breakpoints.down (750)]: {
       marginLeft: '0px',
       display: 'none',
     },

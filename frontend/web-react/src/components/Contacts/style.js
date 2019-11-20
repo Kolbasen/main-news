@@ -3,8 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export default makeStyles((theme) => ({
   content: {
       position: 'fixed',
-      bottom: 50,
-      right: 150,
+      display: 'flex',
+      bottom: 10,
+      right: 40,
       [theme.breakpoints.down (600)]: {
         display: 'none'
       },
@@ -12,7 +13,24 @@ export default makeStyles((theme) => ({
         display: 'none'
       },
       [theme.breakpoints.down (1000)]: {
-        right: 20
+        right: 0
       },
   },
+  list: {
+    display: 'flex'
+  },
+  button: {
+    fontSize: '3em'
+  },
+  currentNewsContent: {
+    position: 'fixed',
+      bottom: 10,
+      right: 0,
+      [theme.breakpoints.up (1100)]: {
+        right: 30,
+      },
+      [theme.breakpoints.down (1000)]: {
+        display: 'none'
+      },
+  }
 }));

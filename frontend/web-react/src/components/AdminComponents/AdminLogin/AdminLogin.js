@@ -31,7 +31,6 @@ export default function AdminLogin () {
     const data = { username, password };
     try {
       const result = await loginQuery(data);
-      console.log(result);
       if (result.success) {
         if (result.entity.token) {
           setToken(result.entity.token);

@@ -23,7 +23,6 @@ export default function Admin() {
     formData.append('photo', photo);
     try {
       const result = await sendCard(formData, token);
-      console.log(result)
     } catch (error) {
       console.log('API call error:', error);
     }

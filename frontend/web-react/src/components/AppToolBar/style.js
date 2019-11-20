@@ -35,19 +35,19 @@ export default makeStyles((theme) => ({
       width: '60%'
     },
     [theme.breakpoints.down ('lg')]: {
-      width: '60%'
+      width: '65%'
     },
     [theme.breakpoints.down ('md')]: {
-      width: '70%'
-    },
-    [theme.breakpoints.down (950)]: {
       width: '80%'
     },
+    [theme.breakpoints.down (950)]: {
+      width: '90%'
+    },
     [theme.breakpoints.down (850)]: {
-      width: '85%'
+      width: '95%'
     },
     [theme.breakpoints.down (800)]: {
-      width: '90%'
+      width: '95%'
     },
     [theme.breakpoints.down (750)]: {
       width: '95%'

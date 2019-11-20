@@ -20,14 +20,12 @@ const getCards = async token => {
       'Authorization': `Bearer ${token}`,
     }
   });
-  console.log(result);   
   return extractResult(result);
 }; 
 
 const sendCard = async (formData, token) => {
   const endpoint = 'admin/add';
   const url = `${API_URL}/${endpoint}`;
-  console.log(formData);
   const result = await fetch(url, {
     method: 'PUT',
     headers: {
@@ -39,7 +37,6 @@ const sendCard = async (formData, token) => {
 };
 
 const editCard = async (formData, token) => {
-  console.log(token);
   const endpoint = 'admin/edit';
   const url = `${API_URL}/${endpoint}`;
   const result = await fetch(url, {

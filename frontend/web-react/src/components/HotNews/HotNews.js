@@ -14,7 +14,7 @@ function HotNews(props) {
       <Card className={classes.card}>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-              Президент умер
+              Еще новости
           </Typography>
         </CardContent>
       </Card>
@@ -23,11 +23,10 @@ function HotNews(props) {
           <div key={id}>
             <Card className={classes.card}>
               <CardActionArea onClick={() => {
-                console.log(history.id);
                 history.push(`/news/${value.id}`); 
               }}>
                 <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
+                  <Typography gutterBottom variant="h5" component="h2" >
                     {value.shortHeader}
                   </Typography>
                 </CardContent>

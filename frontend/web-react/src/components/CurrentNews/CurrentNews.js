@@ -13,8 +13,6 @@ function CurrentNews(props) {
   const params = useParams();
   const { id } = params;
   const { setHotNews, currentNews, setCurrentNews, oneCard, setOneCard } = props;
-  console.log(setOneCard)
-  console.log(oneCard)
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -38,7 +36,7 @@ function CurrentNews(props) {
   }, []);
 
   if (isLoading) return <div>Is Loading...</div>;
-  console.log(oneCard)
+
   return (
     <div className={classes.container}>
       <div className={classes.items}>

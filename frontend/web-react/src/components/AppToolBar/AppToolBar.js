@@ -6,11 +6,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 import useStyle from './style';
 import logo from '../../logo2.png';
 
+const map = new Map([]);
+map.set('world', 'Мир')
+.set('politics', 'Политика')
+.set('ukraine', 'Украина')
+.set('russia', 'Россия')
+.set('technology', 'Технологии')
+
 export default function AppToolBar(props) {
   const { oneCard } = props;
   const classes = useStyle();
   const history = useHistory();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true)
+  const [tag, setTag] = useState(null)
   const [date, setDate] = useState(null)
 
   const toggleDrawer = open => event => {
@@ -26,7 +35,9 @@ export default function AppToolBar(props) {
         const fullDate = new Date(oneCard.createdAt);
         const date = fullDate.toLocaleDateString().split('/').join('.')
         setDate(date)
+        setTag(oneCard.tags)
       } else {
+        setTag(null)
         setDate(null)
       }
     }
@@ -59,7 +70,7 @@ export default function AppToolBar(props) {
 			      </ListItem>
           </div>
           <div className={classes.mobileItem}>
-            <ListItem button component='button'  onClick={() => {setSideDrawerOpen(prevState => !prevState); console.log(1);}}>
+            <ListItem button component='button'  onClick={() => {setSideDrawerOpen(prevState => !prevState)}}>
               <MenuIcon fontSize='large'/>
             </ListItem>
           </div>
@@ -75,10 +86,7 @@ export default function AppToolBar(props) {
       <SideDrawer toggleDrawer={toggleDrawer} sideDrawerOpen={sideDrawerOpen}/>
       <div className={classes.bottomLine}>
         <div>
-          {date}
-        </div>
-        <div>
-
+          {date} {date ? `,` : null} {map.get(tag)}
         </div>
       </div>
     </div>
