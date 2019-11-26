@@ -9,11 +9,11 @@ const News = sequelize.define('news', {
         allowNull: false
       },
       shortHeader: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       header: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
       },
       text: {
@@ -34,7 +34,7 @@ const Photo = sequelize.define('photo', {
     allowNull: false
   },
   filename: {
-    type: Sequelize.STRING,
+    type: Sequelize.TEXT,
     allowNull: false
   }
 })
