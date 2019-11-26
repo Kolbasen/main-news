@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Form from '../Form/Form';
-// import Info from '../Info/Info'
 import { sendCard, getCards, editCard, deleteCard, sendPhoto } from '../../../helpers/apiHelpers';
 import { getToken } from '../../../helpers/tokenHelpers';
+import useStyles from './style'
 
 const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
@@ -13,6 +13,7 @@ export default function Admin() {
   const [cards, setCards] = useState(null);
   const [addingNews, setAddingNews] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const classes = useStyles();
 
   const addNews = async (shortHeader,header, tags, text, photo, token) => {
     const formData = new FormData();
@@ -96,14 +97,15 @@ export default function Admin() {
       />
       {
         cards.map((value) => (
-          <div key={value.id}>
-            <div style={{display: 'flex', alignItems: 'center '}}>
-              <img src={`${API_URL}/${value.photo}`} height='100' width='100'/>
-              <p>{value.shortHeader} </p>
+          <div key={value.id} >
+            <div className={classes.card}>
+              <img src={`${API_URL}/${value.photo}`} className={classes.image}/>
+              <h1>{value.shortHeader} </h1>
               <h2>{value.header} </h2>
               <p>{value.text} </p>
             </div>
             <Form submitData={submitData} value={value} />
+            <div style={{borderBottom: '2px solid black', marginBottom: 50, marginTop: 50}}/>
           </div>
         ))
       }

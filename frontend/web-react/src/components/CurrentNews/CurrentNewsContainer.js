@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setCards } from '../../store/cards/actions';
 import { setHotNews } from '../../store/hotNews/actions';
 import { setCurrentNews } from '../../store/currentNews/actions';
-import { setOneCard } from '../../store/oneCard//actions'
+import { setOneCard } from '../../store/oneCard//actions';
 
 function CurrentNewsContainer(props) {
   const location = useLocation();

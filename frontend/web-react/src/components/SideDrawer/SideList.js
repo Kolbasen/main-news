@@ -2,10 +2,10 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';	
-import Link from '@material-ui/core/Link'	
+import Link from '@material-ui/core/Link';	
 import useStyles from './style';
-import Email from '../../email.png'
-import Telegram from '../../telegram-icon.png'
+import Email from '../../email.png';
+import Telegram from '../../telegram-icon.png';
 import { ListItemIcon } from '@material-ui/core';
 
 
@@ -40,7 +40,7 @@ const SideList = (props) => {
         <ListItemText primary='Технологии'/>
       </ListItem>
       <ListItem component='a'>
-        <a href='mailto::hrealmainnews@gmail.com' target='__blank'>
+        <a href='mailto:realmainnews@gmail.com' target='__blank'>
           <img src={Email} height='45' width='35'/>
         </a>
         <div style={{marginLeft: 15}}/>

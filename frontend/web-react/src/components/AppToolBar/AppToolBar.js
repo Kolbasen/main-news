@@ -8,19 +8,19 @@ import logo from '../../logo2.png';
 
 const map = new Map([]);
 map.set('world', 'Мир')
-.set('politics', 'Политика')
-.set('ukraine', 'Украина')
-.set('russia', 'Россия')
-.set('technology', 'Технологии')
+  .set('politics', 'Политика')
+  .set('ukraine', 'Украина')
+  .set('russia', 'Россия')
+  .set('technology', 'Технологии');
 
 export default function AppToolBar(props) {
   const { oneCard } = props;
   const classes = useStyle();
   const history = useHistory();
   const [sideDrawerOpen, setSideDrawerOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true)
-  const [tag, setTag] = useState(null)
-  const [date, setDate] = useState(null)
+  const [isLoading, setIsLoading] = useState(true);
+  const [tag, setTag] = useState(null);
+  const [date, setDate] = useState(null);
 
   const toggleDrawer = open => event => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -33,15 +33,15 @@ export default function AppToolBar(props) {
     if (oneCard) {
       if (history.location.pathname.match(/news\/([0-9])+/)) {
         const fullDate = new Date(oneCard.createdAt);
-        const date = fullDate.toLocaleDateString().split('/').join('.')
-        setDate(date)
-        setTag(oneCard.tags)
+        const date = fullDate.toLocaleDateString().split('/').join('.');
+        setDate(date);
+        setTag(oneCard.tags);
       } else {
-        setTag(null)
-        setDate(null)
+        setTag(null);
+        setDate(null);
       }
     }
-  }, [history.location, oneCard])
+  }, [history.location, oneCard]);
   
   return (
     <div className={classes.root}>
@@ -70,7 +70,7 @@ export default function AppToolBar(props) {
 			      </ListItem>
           </div>
           <div className={classes.mobileItem}>
-            <ListItem button component='button'  onClick={() => {setSideDrawerOpen(prevState => !prevState)}}>
+            <ListItem button component='button'  onClick={() => {setSideDrawerOpen(prevState => !prevState);}}>
               <MenuIcon fontSize='large'/>
             </ListItem>
           </div>
@@ -86,7 +86,7 @@ export default function AppToolBar(props) {
       <SideDrawer toggleDrawer={toggleDrawer} sideDrawerOpen={sideDrawerOpen}/>
       <div className={classes.bottomLine}>
         <div>
-          {date} {date ? `,` : null} {map.get(tag)}
+          {date} {date ? ',' : null} {map.get(tag)}
         </div>
       </div>
     </div>

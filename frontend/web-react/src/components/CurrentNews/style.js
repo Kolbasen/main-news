@@ -16,6 +16,7 @@ export default makeStyles((theme) => ({
     },
   },
   card: {
+    // display: 'flex',
     width: 380,
     maxWidth: 380,
     marginBottom: theme.spacing(2),
@@ -35,5 +36,5 @@ export default makeStyles((theme) => ({
       marginLeft: '0px',
       display: 'none',
     },
-  }
+  },
 }));

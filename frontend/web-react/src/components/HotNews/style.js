@@ -8,12 +8,26 @@ export default makeStyles((theme) => ({
     marginTop: '70px'
   },
   card: {
-    display: 'block',
+    display: 'flex',
     width: 280,
     height: 103,
     marginBottom: theme.spacing(2),
+    padding: 0
+  },
+  cardContent: {
+    padding: 0,
   },
   media: {
     height: 140,
   },
+  titleCard: {
+    display: 'flex',
+    width: 280,
+    height: 80,
+    marginBottom: theme.spacing(2),
+  },
+  title: {
+    display: 'flex',
+    justifyContent: 'center',
+  }
 }));

@@ -4,7 +4,8 @@ import { Card, CardMedia, CardContent, Typography} from '@material-ui/core';
 import HotNewsContainer from '../HotNews/HotNewsContainer';
 import useStyles from './style';
 import { getOneNews, getHotNews } from '../../helpers/apiHelpers';
-
+import AddBanner from '../AddBanner/AddBanner';
+import Spinner from '../Spinner/Spinner';
 
 const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
@@ -14,6 +15,12 @@ function CurrentNews(props) {
   const { id } = params;
   const { setHotNews, currentNews, setCurrentNews, oneCard, setOneCard } = props;
   const [isLoading, setIsLoading] = useState(true);
+  const [croppedText, setCroppedText] = useState('');
+
+  const cropText = text => {
+    const twoParts = text.split('%!$');
+    setCroppedText(twoParts);
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,7 +29,8 @@ function CurrentNews(props) {
         const [oneNews, hotNews] = await Promise.all([getOneNews(id), getHotNews()]);
         if (oneNews.success && hotNews.success) {
           setHotNews(hotNews.entity);
-          setOneCard(oneNews.entity)
+          setOneCard(oneNews.entity);
+          cropText(oneNews.entity.text);
           setIsLoading(false);
         } else {
           console.log('Something went wrong');
@@ -33,10 +41,9 @@ function CurrentNews(props) {
       }
     }; 
     fetchOneNews(id);
-  }, []);
+  }, [id, setHotNews, setOneCard]);
 
-  if (isLoading) return <div>Is Loading...</div>;
-
+  if (isLoading) return <Spinner/>;
   return (
     <div className={classes.container}>
       <div className={classes.items}>
@@ -54,13 +61,20 @@ function CurrentNews(props) {
             </Typography>
           </CardContent>
         </Card>
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography variant="body1" color="textSecondary" component="p" style={{whiteSpace: 'pre-line'}}>
-              {oneCard.text}
-            </Typography>
-          </CardContent>
-        </Card>
+        {
+          croppedText.map((value, id) => (
+            <Card className={classes.card} key={id}>
+              <CardContent>
+                <Typography variant="body1" color="textPrimary" component="p" style={{whiteSpace: 'pre-line'}}>
+                  {value}
+                </Typography>
+                <AddBanner
+                  slot='7286938203'
+                />
+              </CardContent>
+            </Card>
+          ))
+        }
       </div>
       <div className={classes.hotNews}>
         <HotNewsContainer/>
