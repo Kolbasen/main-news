@@ -2,7 +2,6 @@
 
 const fs = require('fs')
 const jwt = require('jsonwebtoken')
-const { secret } = require('../../config/config')
 const { deleteNews } = require('../../services/news/news.service')
 
 async function deleteNewsController(req, res) {

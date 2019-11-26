@@ -21,7 +21,6 @@ function TagNewsContainer(props) {
 
 const mapStateToProps = state => ({
   cards: state.cards.cards,
-  id: state.id.id,
   hotNews: state.hotNews.hotNews
 });
 

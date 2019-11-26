@@ -31,20 +31,29 @@ export default makeStyles((theme) => ({
   bottomLine: {
     marginRight: 'auto',
     marginLeft: 'auto',
-    [theme.breakpoints.down ('lg')]: {
-      width: '50%'
+    [theme.breakpoints.up ('lg')]: {
+      width: '60%'
     },
-    [theme.breakpoints.down ('md')]: {
+    [theme.breakpoints.down ('lg')]: {
       width: '65%'
     },
-    [theme.breakpoints.down (900)]: {
+    [theme.breakpoints.down ('md')]: {
       width: '80%'
+    },
+    [theme.breakpoints.down (950)]: {
+      width: '90%'
+    },
+    [theme.breakpoints.down (850)]: {
+      width: '95%'
     },
     [theme.breakpoints.down (800)]: {
-      width: '80%'
+      width: '95%'
     },
     [theme.breakpoints.down (750)]: {
-      width: '90%'
+      width: '95%'
+    },
+    [theme.breakpoints.down (700)]: {
+      width: '80%'
     },
     [theme.breakpoints.down ('xs')]: {
       width: '75%'

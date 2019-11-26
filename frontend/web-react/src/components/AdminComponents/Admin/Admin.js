@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect } from 'react-router-dom';
 import Form from '../Form/Form';
-// import Info from '../Info/Info'
 import { sendCard, getCards, editCard, deleteCard, sendPhoto } from '../../../helpers/apiHelpers';
 import { getToken } from '../../../helpers/tokenHelpers';
+import useStyles from './style'
 
 const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
@@ -13,9 +13,9 @@ export default function Admin() {
   const [cards, setCards] = useState(null);
   const [addingNews, setAddingNews] = useState(false);
   const [redirect, setRedirect] = useState(false);
+  const classes = useStyles();
 
   const addNews = async (shortHeader,header, tags, text, photo, token) => {
-    console.log(header, tags, text, photo, token);
     const formData = new FormData();
     formData.append('shortHeader', shortHeader);
     formData.append('header', header);
@@ -24,7 +24,6 @@ export default function Admin() {
     formData.append('photo', photo);
     try {
       const result = await sendCard(formData, token);
-      console.log(result);
     } catch (error) {
       console.log('API call error:', error);
     }
@@ -40,7 +39,6 @@ export default function Admin() {
     formData.append('photo', photo);
     try {
       const result = await editCard(formData, token);
-      console.log(result);
     } catch (error) {
       console.log('API call error:', error);
     }
@@ -49,14 +47,12 @@ export default function Admin() {
   const deleteNews = async (id, token) => {
     try {
       const result = await deleteCard(id, token);
-      console.log(result);
     } catch (error) {
       console.log('API call error:', error);
     }
   };
 
   const submitData = (id, shortHeader, header, tags, text, type, photo, token) => {
-    console.log(id, header,shortHeader, tags, text, type, photo, token);
     if (type === 'add') {
       addNews(shortHeader, header, tags, text, photo, token);
     }
@@ -77,7 +73,6 @@ export default function Admin() {
     const fetchStartingData = async () => {
       const result = await getCards(getToken());
       if (result.success) {
-        console.log(result.entity);
         setCards(result.entity);
         setIsLoading(false);
       } else {
@@ -102,14 +97,15 @@ export default function Admin() {
       />
       {
         cards.map((value) => (
-          <div key={value.id}>
-            <div style={{display: 'flex', alignItems: 'center '}}>
-              <img src={`${API_URL}/${value.photo}`} height='100' width='100'/>
-              <p>{value.shortHeader} </p>
+          <div key={value.id} >
+            <div className={classes.card}>
+              <img src={`${API_URL}/${value.photo}`} className={classes.image}/>
+              <h1>{value.shortHeader} </h1>
               <h2>{value.header} </h2>
               <p>{value.text} </p>
             </div>
             <Form submitData={submitData} value={value} />
+            <div style={{borderBottom: '2px solid black', marginBottom: 50, marginTop: 50}}/>
           </div>
         ))
       }

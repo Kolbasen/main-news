@@ -27,5 +27,13 @@ export default makeStyles(theme => ({
   },
   input: {
     marginBottom: theme.spacing(1)
+  },
+  card: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  image: {
+    width: 380,
+    height: 223
   }
 }));

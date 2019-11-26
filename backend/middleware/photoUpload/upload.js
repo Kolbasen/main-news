@@ -5,7 +5,7 @@ const storageConfig = multer.diskStorage({
         cb(null, 'static')
     },
     filename: (req, file, cb) => {
-        cb(null, `${Date.now()}-${req.body.header}-${file.originalname}`)
+        cb(null, `${Date.now()}-${file.originalname}`)
     }
 })
 
@@ -19,6 +19,7 @@ const fileFilter = (req, file, cb) => {
         cb(null, true);
     }
     else {
+        console.log('Not valid type')
         cb(null, false);
     }
 }

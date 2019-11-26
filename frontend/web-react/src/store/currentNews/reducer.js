@@ -1,7 +1,7 @@
 import { SELECT_CURRENT_NEWS } from '../actionsConsts';
 
 const initialState = {
-  id: null,
+  currentNews: null,
 };
 
 export const currentNewsReducer = (state = initialState, action) => {
@@ -9,7 +9,7 @@ export const currentNewsReducer = (state = initialState, action) => {
   case SELECT_CURRENT_NEWS: 
     return {
       ...state, 
-      id: action.payload
+      currentNews: action.payload[0]
     };
   default:
     return state;

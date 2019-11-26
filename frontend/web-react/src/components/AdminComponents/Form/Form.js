@@ -18,7 +18,6 @@ export default function AddForm(props) {
   
   const setImageUrl = url => {
     setImg(url);
-    console.log(img);
   };
   return (
     <Container component='main'>

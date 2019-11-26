@@ -2,7 +2,6 @@
 
 const { insertNews } = require('../../services/news/news.service'); 
 const jwt = require('jsonwebtoken')
-const { secret } = require('../../config/config')
 
 async function addNewsController(req, res) {
     const photo = req.file;

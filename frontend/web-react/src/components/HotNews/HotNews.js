@@ -2,6 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { Card, CardActionArea, CardContent, Typography} from '@material-ui/core';
 import useStyle from './style';
+import AddBanner from '../AddBanner/AddBanner';
 
 
 function HotNews(props) {
@@ -11,24 +12,28 @@ function HotNews(props) {
 
   return (
     <div>
-      <Card className={classes.card}>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-              Hot news
-          </Typography>
-        </CardContent>
+      <Card className={classes.titleCard}>
+        <CardActionArea onClick={() => {
+          history.push('/'); 
+        }}>
+          <CardContent className={classes.title}>
+            <Typography gutterBottom variant="h5" component="h2">
+              Все новости
+            </Typography>
+          </CardContent>
+        </CardActionArea>
       </Card>
       {
         hotNews.map((value, id) => (    
           <div key={id}>
             <Card className={classes.card}>
               <CardActionArea onClick={() => {
-                console.log(history.id);
-                setCurrentNews(value.id);
                 history.push(`/news/${value.id}`); 
-              }}>
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
+              }}
+              className={classes.action}
+              >
+                <CardContent className={classes.cardContent}>
+                  <Typography gutterBottom variant="h5" component="h2" style={{textAlign: "center"}}>
                     {value.shortHeader}
                   </Typography>
                 </CardContent>
@@ -37,6 +42,7 @@ function HotNews(props) {
           </div>
         ))
       }
+      <AddBanner/>
     </div>
   );
 }

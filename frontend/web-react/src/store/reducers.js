@@ -2,9 +2,11 @@ import { combineReducers } from 'redux';
 import { currentNewsReducer } from './currentNews/reducer';
 import { setCardsReducer } from './cards/reducer'; 
 import { hotNewsReducer } from './hotNews/reducer';
+import { oneCardReducer } from './oneCard/reducer';
 
 export default combineReducers({
-  id: currentNewsReducer,
+  currentNews: currentNewsReducer,
   cards: setCardsReducer,
-  hotNews: hotNewsReducer
+  hotNews: hotNewsReducer,
+  oneCard: oneCardReducer,
 });

@@ -7,4 +7,7 @@ export default makeStyles(theme => ({
   fullList: {
     width: 'auto',
   },
+  a: {
+    textDecoration: 'none'
+  }
 }));

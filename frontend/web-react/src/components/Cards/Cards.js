@@ -4,11 +4,14 @@ import { Card, CardActionArea, CardMedia, CardContent, Typography, Button} from 
 import useStyles from './style';
 import { getTenCards } from '../../helpers/apiHelpers';
 import useInfiniteScroll from '../../helpers/useInfiniteScrollHelper';
+import Spinner from '../Spinner/Spinner';
+import AddBanner from '../AddBanner/AddBanner';
+
 
 const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
 function Cards(props) {
-  const { cards, setCards, setCurrentNews } = props;
+  const { cards, setCards } = props;
   const history = useHistory();
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(true);
@@ -47,15 +50,15 @@ function Cards(props) {
     fetchStartingData(currId);
   }, []); 
 
-  if (isLoading) return <h1>Is Loading...</h1>;
+  if (isLoading) return <Spinner/>;
   
   return(
-    <div style={{marginTop: '80px'}}>
+    <div style={{marginTop: '25px'}}>
       {cards.map((value, id) => (
+        
         <div key={id} className={classes.items}>
           <Card className={classes.card}>
             <CardActionArea onClick={() => {
-              setCurrentNews(value.id);
               history.push(`/news/${value.id}`);
             }}>
               <CardMedia
@@ -70,6 +73,13 @@ function Cards(props) {
               </CardContent>
             </CardActionArea>
           </Card>
+          {
+            (id + 1) % 2 === 0 ? 
+              <AddBanner
+                slot='7286938203'
+              />
+              : null
+          }
         </div>
       ))}
       {isFetching && newsLeft ? 'Fetching more cards' : null}

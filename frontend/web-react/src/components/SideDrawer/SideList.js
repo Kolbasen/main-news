@@ -1,8 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';		
+import ListItemText from '@material-ui/core/ListItemText';	
+import Link from '@material-ui/core/Link';	
 import useStyles from './style';
+import Email from '../../email.png';
+import Telegram from '../../telegram-icon.png';
+import { ListItemIcon } from '@material-ui/core';
 
 
 const SideList = (props) => {
@@ -34,6 +38,15 @@ const SideList = (props) => {
       </ListItem>
       <ListItem button component='a' onClick={() => history.push('/news/tag/technology')}>
         <ListItemText primary='Технологии'/>
+      </ListItem>
+      <ListItem component='a'>
+        <a href='mailto:realmainnews@gmail.com' target='__blank'>
+          <img src={Email} height='45' width='35'/>
+        </a>
+        <div style={{marginLeft: 15}}/>
+        <a className={classes.a} href='https://t.me/realmainnews' target='__blank'>
+          <img  src={Telegram} height='30' width='30' />
+        </a>
       </ListItem>
     </div>
   );

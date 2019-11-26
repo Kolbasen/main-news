@@ -3,6 +3,8 @@ import { useParams, useHistory } from 'react-router-dom';
 import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@material-ui/core';
 import { getTagNews } from '../../helpers/apiHelpers';
 import useStyles from './style';
+import Spinner from '../Spinner/Spinner';
+
 
 const API_URL = process.env.NODE_ENV === 'production' ? `${process.env.REACT_APP_API_URL}` : 'http://localhost:8000';
 
@@ -22,18 +24,17 @@ export default function TagNews(props) {
       }
     };
     fetchTagNews(params.tag);
-  }, []);
+  }, [params.tag, setCards]);
 
-  if (isLoading) return <h1 style={{marginTop: '70px'}}>Is Loading...</h1>;
+  if (isLoading) return <Spinner/>;
   
   return (
-    <div style={{marginTop: '70px'}}>
+    <div>
       {
         cards.map((value) => (
           <div key={value.id} className={classes.items}>
             <Card className={classes.card}>
               <CardActionArea onClick={() => {
-                setCurrentNews(value.id);
                 history.push(`/news/${value.id}`);  
               }}>
                 <CardMedia

@@ -1,11 +1,7 @@
 import { ADD_CARDS } from '../actionsConsts';
 
 const initialState = {
-  cards: [{ id: 1,
-    name: 'asdsa',
-    text: 'asdasd',
-    createdAt: '2019-10-12T21:11:07.500Z',
-    updatedAt: '2019-10-12T21:11:07.500Z' }]
+  cards: null
 };
 
 export const setCardsReducer = (state = initialState, action) => {
